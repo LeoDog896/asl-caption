@@ -1,8 +1,5 @@
-# Python
-venv
-
-# NodeJS
-node_modules
-
 # Editor
 .idea
+
+# Mac
+.DS_Store
