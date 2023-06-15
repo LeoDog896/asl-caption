@@ -1,12 +1,12 @@
 import type { PageLoad } from './$types';
 
-export const load = (async ({ fetch }) => {
-	const backend = import.meta.env.VITE_BACKEND_URL;
+import { backend } from '$lib/backend';
 
-	const response = await fetch(`${backend}/hello`);
+export const load: PageLoad = async ({ fetch }) => {
+	const response = await fetch(backend('ping'));
 	const data = await response.json();
 
 	return {
 		message: data.message
 	};
-}) satisfies PageLoad;
+};
