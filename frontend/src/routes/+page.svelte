@@ -1,11 +1,27 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+  import type { PageData } from './$types';
 
-	export let data: PageData;
+  import { backend } from '$lib/backend';
+  import FileUpload from '$lib/component/FileUpload.svelte';
+
+  export let data: PageData;
+
+  let file: File | undefined;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<svelte:head>
+  <title>ASL Caption</title>
+</svelte:head>
 
-<h2>Server Response:</h2>
-<code>{data.message}</code>
+<h1>ASL Caption</h1>
+Very much a WIP
+
+<h2>Server Response Status: <code>{data.status} {data.statusText}</code></h2>
+Server Message:<code>{data.message}</code>
+
+<h2>File Upload Test</h2>
+<form action={backend('upload')} method="post" enctype="multipart/form-data">
+  <FileUpload id="file" name="file" bind:file />
+
+  <button type="submit">Upload</button>
+</form>

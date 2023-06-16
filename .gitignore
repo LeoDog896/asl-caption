@@ -1,5 +1,6 @@
 # Editor
-.idea
+/.idea
+/out
 
 # Mac
 .DS_Store
