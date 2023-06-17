@@ -25,13 +25,13 @@ def api_ping():
 def api_upload():
     if 'file' not in request.files:
         return jsonify({'error': 'invalid request: no file part'}), exceptions.BadRequest.code
-    file = request.files['file']
+    file = request.files.get('file')
 
-    if file.filename == '':
+    if file is None or file.filename == '':
         return jsonify({'error': 'invalid request: no file supplied'}), exceptions.BadRequest.code
 
     filename = secure_filename(file.filename)
 
     content = file.stream.read()
     msg = f'Received file "{filename}" of type "{file.mimetype}" with size of {len(content)}B!'
-    return jsonify({'message': msg}), exceptions.OK.code
+    return jsonify({'message': msg}), 200
