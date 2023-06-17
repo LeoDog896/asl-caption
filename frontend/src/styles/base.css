@@ -1,0 +1,21 @@
+:root {
+  /* TODO: better font */
+  font-family: sans-serif;
+  font-size: 18px;
+  font-synthesis: none;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/**  elements  **/
+
+input, button {
+  font-size: inherit;
+}
