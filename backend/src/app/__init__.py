@@ -1,7 +1,7 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from werkzeug.datastructures.file_storage import FileStorage
+from werkzeug.utils import secure_filename
 
 # status codes
 
@@ -24,11 +24,6 @@ def api_ping():
     }
 
 
-def allowed_file(file: FileStorage) -> bool:
-    return '.' in file.filename and \
-        file.filename.rsplit('.', 1)[1].lower()
-
-
 @app.route('/api/upload', methods=['POST'])
 def api_upload():
     if 'file' not in request.files:
@@ -37,9 +32,9 @@ def api_upload():
 
     if file.filename == '':
         return jsonify({'error': 'invalid request: no file supplied'}), 400
-    if not allowed_file(file):
-        return jsonify({'error': 'invalid request: unsupported file type'}), 400
+
+    filename = secure_filename(file.filename)
 
     content = file.stream.read()
-    msg = f'Received file "{file.filename}" of type "{file.mimetype}" with size of {len(content)}B!'
+    msg = f'Received file "{filename}" of type "{file.mimetype}" with size of {len(content)}B!'
     return jsonify({'message': msg}), 200
