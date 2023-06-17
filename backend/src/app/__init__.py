@@ -14,13 +14,6 @@ CORS(app, resources={
 
 # api routes
 
-@app.route('/api/ping')
-def api_ping():
-    return {
-        'message': 'Hello, Flask!'
-    }
-
-
 @app.route('/api/upload', methods=['POST'])
 def api_upload():
     if 'file' not in request.files:
