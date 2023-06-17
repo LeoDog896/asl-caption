@@ -1,7 +1,9 @@
 # asl-caption
-generate captions from videos containing ASL
+
+Generate captions for videos containing ASL,
 
 ## Project Structure
+
 - `backend`: Flask server that contains the AI model
 - `frontend`: User-facing SvelteKit frontend
 
@@ -10,10 +12,18 @@ generate captions from videos containing ASL
 ### Backend
 
 1. `cd backend`
-2. (use any virtual enviornment of your choice, or install the dependencies manually)
+2. (use any virtual environment of your choice and install the dependencies with `pip install -e .`)
 3. `flask run`
 
 ### Frontend
+
+Vite an environment variable to locate the server, which is served by default at `http://localhost:5000`.
+An example file is provided at [.env.example](frontend/.env.example).
+
+To develop the frontend, make a copy of this file in the same directory and name it `.env.development`.
+
+> **Note:** When it's time to compile the frontend, the deployment URL of the backend should be placed in
+> `.env.production`.
 
 1. Install pnpm: `npm install -g pnpm`
 2. `cd frontend`
