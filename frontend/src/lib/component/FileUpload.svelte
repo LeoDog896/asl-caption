@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {IconX} from "@tabler/icons-svelte"
+
   export let id: string;
   export let name: string;
   export let accept: string | undefined = undefined;
@@ -28,7 +30,9 @@
       {:else}
         {file.name}
 
-        <button class="remove" on:click={remove}>Remove</button>
+        <button class="remove" on:click={remove}>
+          <IconX />
+        </button>
       {/if}
     </div>
   </label>
