@@ -1,3 +1,15 @@
 :root {
+  --white: #fff;
+  --black: #121212;
 
+  /* default dark colorscheme */
+  --text: var(--white);
+  --background: var(--black);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --text: var(--black);
+    --background: var(--white);
+  }
 }
