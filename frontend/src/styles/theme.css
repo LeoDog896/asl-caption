@@ -1,15 +1,53 @@
 :root {
+  /* scale */
+
+  --text-large: 1.3rem;
+
+  --gap: 2rem;
+
+  --radius-small: 1em;
+  --radius-big: 2em;
+
+  /* easings */
+  --ease-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* color variables */
+
   --white: #fff;
+  --white-1: #d8d8d8;
   --black: #121212;
+  --black-1: #2d2d2d;
+
+  --purple: #9968de;
+
+  --red: #8f3b3b;
 
   /* default dark colorscheme */
+
   --text: var(--white);
   --background: var(--black);
+  --surface: var(--black-1);
+
+  --primary: var(--purple);
+  --text-primary: var(--white);
+
+  /* common styles */
+
+  --shadow-color: #8882;
+  --shadow-size: 60px;
+  --shadow-rim-size: 8px;
+  --shadow-rim-color: #bbb2;
+  --shadow: 0 0 var(--shadow-size) calc(var(--shadow-size) * -0.2) var(--shadow-color),
+      0 0 var(--shadow-rim-size) var(--shadow-rim-color);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --text: var(--black);
     --background: var(--white);
+    --surface: var(--white-1);
+
+    --shadow-color: #4444;
+    --shadow: 0 0 var(--shadow-size) calc(var(--shadow-size) * -0.2) var(--shadow-color);
   }
 }

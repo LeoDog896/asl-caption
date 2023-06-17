@@ -15,7 +15,9 @@ Very much a WIP
 
 <h2>File Upload Test</h2>
 <form action={backend('upload')} method="post" enctype="multipart/form-data" use:enhance>
-  <FileUpload id="file" name="file" bind:file />
+  <FileUpload id="file" name="file" bind:file>
+    Please choose a file
+  </FileUpload>
 
-  <button type="submit">Upload</button>
+  <button type="submit" class="primary">Upload</button>
 </form>
