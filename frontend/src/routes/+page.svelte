@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { backend } from "$lib/backend";
-  import FileUpload from "$lib/component/FileUpload.svelte";
-  import { enhance } from "$app/forms";
+  import { backend } from '$lib/backend';
+  import FileUpload from '$lib/component/FileUpload.svelte';
+  import { enhance } from '$app/forms';
 
   let file: File | undefined;
 </script>
@@ -15,9 +15,7 @@
 
 <h2>File Upload Test</h2>
 <form action={backend('upload')} method="post" enctype="multipart/form-data" use:enhance>
-  <FileUpload id="file" name="file" bind:file>
-    Please choose a file
-  </FileUpload>
+  <FileUpload id="file" name="file" bind:file>Please choose a file</FileUpload>
 
   <button type="submit" class="primary">Upload</button>
 </form>

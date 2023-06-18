@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {IconX} from "@tabler/icons-svelte"
-  import {page} from "$app/stores"
+  import { IconX } from '@tabler/icons-svelte';
+  import { page } from '$app/stores';
 
   export let id: string;
   export let name: string;

@@ -15,7 +15,9 @@
   -moz-text-size-adjust: 100%;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -46,7 +48,8 @@ form {
   gap: 2rem;
 }
 
-input, button {
+input,
+button {
   font-size: inherit;
 }
 

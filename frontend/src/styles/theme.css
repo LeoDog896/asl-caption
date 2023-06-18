@@ -38,7 +38,7 @@
   --shadow-rim-size: 8px;
   --shadow-rim-color: #bbb2;
   --shadow: 0 0 var(--shadow-size) calc(var(--shadow-size) * -0.2) var(--shadow-color),
-      0 0 var(--shadow-rim-size) var(--shadow-rim-color);
+    0 0 var(--shadow-rim-size) var(--shadow-rim-color);
 }
 
 @media (prefers-color-scheme: light) {
