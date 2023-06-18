@@ -11,7 +11,7 @@
 </svelte:head>
 
 <h1>ASL Caption</h1>
-Very much a WIP
+<h2>Caption alphabetic ASL images (and TODO video) with ease</h2>
 
 <h2>File Upload Test</h2>
 <form action={backend('upload')} method="post" enctype="multipart/form-data" use:enhance>

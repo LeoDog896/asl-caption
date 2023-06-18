@@ -8,6 +8,6 @@
 
 <style>
   main {
-
+    margin: 2rem;
   }
 </style>

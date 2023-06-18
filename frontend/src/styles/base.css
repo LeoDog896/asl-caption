@@ -1,6 +1,9 @@
+/* TODO: move locally / use vite plugin */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+
 :root {
-  /* TODO: better font (Inter?) */
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   font-size: 18px;
   font-synthesis: none;
 
@@ -14,6 +17,14 @@
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: 500;
 }
 
 /* document */
