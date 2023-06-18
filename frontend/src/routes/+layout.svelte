@@ -1,4 +1,5 @@
 <script lang="ts">
+  import 'unfonts.css';
   import '../styles/main.css';
 </script>
 
