@@ -6,11 +6,11 @@ import Unfonts from 'unplugin-fonts/vite';
 export default defineConfig({
   plugins: [
     sveltekit(),
-    
+
     Unfonts({
       custom: {
         families: {
-          'Inter': {
+          Inter: {
             src: './src/assets/fonts/inter/Inter*',
             local: 'Inter'
           },
@@ -28,7 +28,7 @@ export default defineConfig({
           }
         },
 
-        display: 'swap',
+        display: 'swap'
       }
     })
   ]
