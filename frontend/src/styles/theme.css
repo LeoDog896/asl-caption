@@ -13,23 +13,18 @@
 
   /* color variables */
 
-  --white: #fff;
-  --white-1: #d8d8d8;
-  --black: #121212;
-  --black-1: #2d2d2d;
+  --dark-background: #191627;
+  --light-background: #f7ece1;
+  --primary: #995fa3;
+  --secondary: #8d86c9;
 
-  --purple: #9968de;
-
-  --red: #8f3b3b;
+  --text-bold: #ffadff;
 
   /* default dark colorscheme */
 
-  --text: var(--white);
-  --background: var(--black);
+  --text: white;
+  --background: var(--dark-background);
   --surface: var(--black-1);
-
-  --primary: var(--purple);
-  --text-primary: var(--white);
 
   /* common styles */
 
@@ -43,9 +38,8 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --text: var(--black);
-    --background: var(--white);
-    --surface: var(--white-1);
+    --text: black;
+    --background: var(--light-background);
 
     --shadow-color: #4444;
     --shadow: 0 0 var(--shadow-size) calc(var(--shadow-size) * -0.2) var(--shadow-color);
