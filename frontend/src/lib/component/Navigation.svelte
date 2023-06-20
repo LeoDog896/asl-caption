@@ -1,22 +1,28 @@
 <nav>
-  <div class="title">
+  <div class="wrapper">
     <h1><a href="/">ASL Caption</a></h1>
-  </div>
-  <div class="links">
-    <a href="#upload">Upload</a>
-    <a href="#about">About</a>
+
+    <div class="links">
+      <a href="#upload">Upload</a>
+      <a href="#about">About</a>
+    </div>
   </div>
 </nav>
 
 <style>
   nav {
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .wrapper {
     display: flex;
     /* narrow screen layout */
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
-    border-bottom: 2px solid var(--primary);
+    max-width: 60rem;
+    margin: 0 auto;
   }
 
   h1 {
@@ -50,7 +56,7 @@
 
   /* wide screen layout */
   @media (min-width: 700px) {
-    nav {
+    .wrapper {
       flex-direction: row;
     }
 

@@ -132,8 +132,8 @@
   }
 
   .buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
   }
 
   /* TODO: i don't quite like the spacing of the icons - this can probably be tinkered with a bit to look better */
@@ -149,7 +149,7 @@
     font-weight: 500;
     font-size: var(--text-large);
 
-    color: var(--text-primary);
+    color: inherit;
     background-color: var(--secondary);
 
     display: flex;
@@ -157,10 +157,17 @@
     align-items: center;
     gap: 0.2em;
 
+    width: 14rem;
     height: 100%;
   }
 
   .buttons .button:hover {
     background-color: var(--secondary-hover);
+  }
+
+  @media (min-width: 700px) {
+    .buttons {
+      flex-direction: row;
+    }
   }
 </style>
