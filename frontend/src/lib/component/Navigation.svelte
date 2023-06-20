@@ -1,8 +1,8 @@
 <nav>
-  <div id="title">
+  <div class="title">
     <h1><a href="/">ASL Caption</a></h1>
   </div>
-  <div id="links">
+  <div class="links">
     <a href="#upload">Upload</a>
     <a href="#about">About</a>
   </div>
@@ -31,11 +31,11 @@
     color: inherit;
   }
 
-  #links {
+  .links {
     display: flex;
   }
 
-  #links a {
+  .links a {
     font-weight: 700;
     font-size: 1.2rem;
     color: var(--text);
@@ -44,7 +44,7 @@
     transition: all 0.2s ease-in-out;
   }
 
-  #links a:hover {
+  .links a:hover {
     color: var(--primary);
   }
 
