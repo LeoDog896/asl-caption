@@ -38,10 +38,12 @@
   <img src="landing.png" alt="Hand doing the ASL pose for 'R'." />
 
   <div class="container">
-    <div id="upload">
+    <div class="upload">
       <h3>Upload your Media</h3>
       <div class="buttons">
-        <FileUpload class="button" id="file" name="file" bind:file><IconFile />From File</FileUpload>
+        <FileUpload id="file" bind:file>
+          <div class="button"><IconFile />From File</div>
+        </FileUpload>
         <button class="button"><IconCamera />From Camera</button>
       </div>
     </div>
@@ -77,41 +79,41 @@
     align-items: center;
   }
 
-  #upload {
+  .upload {
     text-align: center;
     background-color: var(--primary);
   }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   /* TODO: i don't quite like the spacing of the icons - this can probably be tinkered with a bit to look better */
-  :global(.button) {
+  .buttons .button {
     position: relative;
-    border: 4px solid transparent;
-    background-color: var(--surface);
+    border: none;
+    border-radius: 0;
 
     cursor: pointer;
 
     margin: 0;
-
-    padding: 0.4em 1.25em;
+    padding: 0.5em 1.25em;
     font-weight: 500;
     font-size: var(--text-large);
 
     color: var(--text-primary);
     background-color: var(--secondary);
-    border-radius: 0;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 0.2em;
+
+    height: 100%;
   }
 
-  :global(.button):hover {
+  .buttons .button:hover {
     background-color: var(--secondary-hover);
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 </style>

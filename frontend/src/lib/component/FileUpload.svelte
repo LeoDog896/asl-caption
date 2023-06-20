@@ -1,13 +1,7 @@
 <script lang="ts">
-  import { IconX } from '@tabler/icons-svelte';
-
   export let id: string;
-  export let name: string;
   export let accept: string | undefined = undefined;
   export let required: boolean = true;
-  let clazz: string | undefined = undefined;
-
-  export { clazz as class };
 
   export let file: File | undefined;
 
@@ -18,8 +12,28 @@
   };
 </script>
 
-<button class={clazz} on:click={() => input.click()}>
-  <slot />
-</button>
+<div class="wrapper">
+  <label for={id}>
+    <slot />
+  </label>
 
-<input hidden type="file" {id} {name} {accept} {required} bind:this={input} on:change={change} />
+  <input type="file" {id} {accept} {required} bind:this={input} on:change={change} />
+</div>
+
+<style>
+  .wrapper {
+    display: relative;
+  }
+
+  label {
+    display: contents;
+  }
+
+  input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    opacity: 0;
+  }
+</style>
