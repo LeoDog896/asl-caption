@@ -6,15 +6,15 @@
   let file: File | undefined;
 
   $: if (file) {
-    const url = backend("upload");
+    const url = backend('upload');
 
     const formData = new FormData();
 
-    formData.append("file", file);
+    formData.append('file', file);
 
     fetch(url, {
-      method: "POST",
-      body: formData,
+      method: 'POST',
+      body: formData
     })
       .then((response) => response.json())
       .then((data) => {
@@ -83,7 +83,7 @@
     text-align: center;
     background-color: var(--primary);
   }
-  
+
   .buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
