@@ -11,6 +11,8 @@
 <style>
   nav {
     display: flex;
+    /* narrow screen layout */
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
 
@@ -21,11 +23,16 @@
     font-weight: 900;
     font-size: 2rem;
     color: var(--text-bold);
+    margin: 1rem 1rem 0;
   }
 
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  #links {
+    display: flex;
   }
 
   #links a {
@@ -39,5 +46,16 @@
 
   #links a:hover {
     color: var(--primary);
+  }
+
+  /* wide screen layout */
+  @media (min-width: 700px) {
+    nav {
+      flex-direction: row;
+    }
+
+    h1 {
+      margin: 1rem;
+    }
   }
 </style>
