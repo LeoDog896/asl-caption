@@ -33,13 +33,13 @@
 <main>
   <h1>See the world speak.</h1>
 
-  <h3>We translate ASL to English in all media.</h3>
+  <h2>We translate ASL to English in all media.</h2>
 
   <img src="landing.png" alt="Hand doing the ASL pose for 'R'." />
 
   <div class="container">
     <div id="upload">
-      <h2>Upload your Media</h2>
+      <h3>Upload your Media</h3>
       <div class="buttons">
         <FileUpload class="button" id="file" name="file" bind:file><IconFile />From File</FileUpload>
         <button class="button"><IconCamera />From Camera</button>
@@ -58,7 +58,7 @@
     text-align: center;
   }
 
-  h3 {
+  h2 {
     font-size: 1.7rem;
     text-align: center;
     font-weight: 200;
