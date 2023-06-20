@@ -60,27 +60,3 @@ input,
 button {
   font-size: inherit;
 }
-
-button {
-  position: relative;
-  border: 4px solid transparent;
-  background-color: var(--surface);
-
-  cursor: pointer;
-
-  padding: 0.4em 1.25em;
-
-  transition: border 0.5s ease;
-}
-
-button:hover {
-  border: 4px solid var(--text);
-}
-
-button.primary {
-  font-weight: 500;
-  font-size: var(--text-large);
-
-  color: var(--text-primary);
-  background-color: var(--primary);
-}
