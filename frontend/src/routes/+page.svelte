@@ -1,10 +1,29 @@
 <script lang="ts">
   import { backend } from '$lib/backend';
   import FileUpload from '$lib/component/FileUpload.svelte';
-  import { enhance } from '$app/forms';
   import { IconCamera, IconFile } from '@tabler/icons-svelte';
 
   let file: File | undefined;
+
+  $: if (file) {
+    const url = backend("upload");
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 </script>
 
 <svelte:head>
@@ -22,19 +41,11 @@
     <div id="upload">
       <h2>Upload your Media</h2>
       <div class="buttons">
-        <button><IconFile />From File</button>
-        <button><IconCamera />From Camera</button>
+        <FileUpload class="button" id="file" name="file" bind:file><IconFile />From File</FileUpload>
+        <button class="button"><IconCamera />From Camera</button>
       </div>
     </div>
   </div>
-
-  <!-- <h2>Upload an image</h2>
-
-  <form action={backend('upload')} method="post" enctype="multipart/form-data" use:enhance>
-    <FileUpload id="file" name="file" bind:file>Please choose a file</FileUpload>
-
-    <button type="submit" class="primary">Upload</button>
-  </form> -->
 </main>
 
 <style>
@@ -71,9 +82,8 @@
     background-color: var(--primary);
   }
 
-
   /* TODO: i don't quite like the spacing of the icons - this can probably be tinkered with a bit to look better */
-  button {
+  :global(.button) {
     position: relative;
     border: 4px solid transparent;
     background-color: var(--surface);
@@ -95,10 +105,13 @@
     align-items: center;
   }
 
+  :global(.button):hover {
+    background-color: var(--secondary-hover);
+  }
+
   .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
 </style>
