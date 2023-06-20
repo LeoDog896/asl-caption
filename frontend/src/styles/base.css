@@ -15,7 +15,7 @@
 @supports (font-variation-settings: normal) {
   :root {
     /* enable variable fonts if available */
-    font-family: 'Inter var', sans-serif;
+    font-family: 'Inter Variable', sans-serif;
   }
 }
 
