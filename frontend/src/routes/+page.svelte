@@ -32,7 +32,7 @@
 
 <main>
   <div class="padding">
-    <h1>See the world speak.</h1>
+    <h1>See the <span class="gradient">world</span> speak.</h1>
 
     <h2>We translate ASL to English in all media.</h2>
 
@@ -70,6 +70,13 @@
 </main>
 
 <style>
+  .gradient {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   #slant {
     padding: 2rem;
     padding-top: 4rem;
@@ -94,7 +101,7 @@
     text-align: center;
     font-weight: 900;
   }
-  
+
   @media (max-width: 600px) {
     h1 {
       font-size: 4rem;
