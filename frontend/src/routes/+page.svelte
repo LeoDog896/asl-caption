@@ -39,7 +39,7 @@
     <img src="landing.png" alt="Hand doing the ASL pose for 'R'." />
 
     <div class="container">
-      <div class="upload">
+      <div id="upload">
         <h3>Upload your Media</h3>
         <div class="buttons">
           <FileUpload id="file" bind:file>
@@ -51,7 +51,7 @@
     </div>
   </div>
   <div id="slant">
-    <h2>About Us</h2>
+    <h2 id="about">About Us</h2>
 
     <p>
       We're a group of students who are passionate about closing the gap between the hearing and
@@ -133,7 +133,7 @@
     align-items: center;
   }
 
-  .upload {
+  #upload {
     text-align: center;
     background-color: var(--primary);
   }
