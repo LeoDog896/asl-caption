@@ -10,6 +10,11 @@
   import MODEL_URL from '../model/model.json?url';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
 
+  import ConfusionMatrixNormalized from "../images/statistics/confusion_matrix_normalized.png";
+  import PCurve from "../images/statistics/P_curve.png";
+  import PRCurve from "../images/statistics/PR_curve.png";
+  import RCurve from "../images/statistics/R_curve.png";
+
   let file: File | undefined;
   let model: tf.GraphModel<string | tf.io.IOHandler>;
   let loading = true;
@@ -77,7 +82,7 @@
       </div>
     </div>
   </div>
-  <div id="slant">
+  <div class="slant">
     <h2 id="about">About Us</h2>
 
     <p>
@@ -93,6 +98,16 @@
       and its role in facilitating communication for the deaf community, we have taken the first
       step towards making the world a more accessible place.
     </p>
+  <div class="slant slant-secondary">
+    
+    <h2>Evaluation</h2>
+
+    <div id="evaluationGrid">
+      <img src={ConfusionMatrixNormalized} alt="Confusion Matrix" />
+      <img src={PCurve} alt="P Curve" />
+      <img src={PRCurve} alt="PR Curve" />
+      <img src={RCurve} alt="R Curve" />
+    </div>
   </div>
 </main>
 
@@ -107,6 +122,13 @@
     animation: spin 1s linear infinite;
   }
 
+  #evaluationGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1rem;
+  }
+
   @keyframes spin {
     0% {
       transform: rotate(0deg);
@@ -117,7 +139,7 @@
     }
   }
 
-  #slant {
+  .slant {
     padding: 2rem;
     padding-top: 4rem;
     background-color: var(--primary);
@@ -126,7 +148,11 @@
     text-align: center;
   }
 
-  #slant p {
+  .slant-secondary {
+    background-color: var(--secondary);
+  }
+
+  .slant p {
     font-size: 1.2rem;
     font-weight: 400;
     line-height: 1.5;
