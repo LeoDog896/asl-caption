@@ -120,7 +120,7 @@
 </svelte:head>
 
 <main>
-  <div class="padding">
+  <div class="landing">
     <h1>See the <span class="gradient">world</span> speak.</h1>
 
     <h2>We translate ASL to English in all media.</h2>
@@ -129,7 +129,7 @@
 
     <div class="container">
       <div id="upload">
-        <h3>Upload your Media</h3>
+        <h3 class="small-call">Upload your Media</h3>
         <div class="buttons">
           <FileUpload id="file" bind:file>
             <div class="button"><IconFile />From File</div>
@@ -150,17 +150,19 @@
     <h2 id="about">About Us</h2>
 
     <p>
-      We're a group of students who are passionate about promoting inclusive communication for all.
-      We firmly believe that communication is a fundamental human right and no one should be left
+      We're a group of students who are <b>passionate</b> about promoting inclusive communication for all.
+      We firmly believe that <b>communication</b> is a fundamental human right and no one should be left
       behind due to barriers caused by hearing differences.
     </p>
 
     <p>
-      Our mission is to create a world where everyone can effectively and effortlessly communicate,
+      Our mission is to create a world where everyone can <b>effectively</b> and <b>effortlessly</b> communicate,
       regardless of their hearing abilities. By recognizing the importance of American Sign Language
       and its role in facilitating communication for the deaf community, we have taken the first
       step towards making the world a more accessible place.
     </p>
+
+    <h3 style="font-size: 35px">Our Team</h3>
 
     <div id="people">
       <img src={Hazel} alt="Hazel"/>
@@ -200,6 +202,16 @@
 </footer>
 
 <style>
+  :root {
+    --max-width: 1500px;
+  }
+
+  .small-call {
+    font-size: 35px;
+    margin: 1rem;
+    font-weight: 800;
+  }
+
   footer {
     text-align: center;
     padding: 1rem;
@@ -225,6 +237,11 @@
     object-fit: cover;
   }
 
+  p {
+    max-width: 1500px;
+    margin: 2rem auto;
+  }
+
   #people {
     display: flex;
     flex-wrap: wrap;
@@ -242,7 +259,6 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    color: black;
     width: 100%;
     height: 100%;
     transform: translate(-50%, -50%);
@@ -252,7 +268,7 @@
     padding: 2rem;
     background-color: var(--secondary);
     opacity: 0;
-    color: white;
+    color: whitesmoke;
     transition: opacity 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
@@ -293,7 +309,7 @@
   }
 
   .slant-secondary {
-    background-color: var(--secondary);
+    background-color: var(--test-color);
     clip-path: polygon(0 0, 100% 5rem, 100% 100%, 0 100%);
   }
 
@@ -307,8 +323,21 @@
     line-height: 1.5;
   }
 
-  .padding {
+  .landing {
     padding: 2rem;
+    animation: entry 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  @keyframes entry {
+    0% {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   h1 {
