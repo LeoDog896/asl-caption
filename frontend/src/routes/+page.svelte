@@ -98,15 +98,18 @@
       and its role in facilitating communication for the deaf community, we have taken the first
       step towards making the world a more accessible place.
     </p>
-  <div class="slant slant-secondary">
-    
-    <h2>Evaluation</h2>
+  </div>
+  <div class="color-container">
+    <div class="slant slant-secondary">
+      <spacer type="horizontal" width="500" height="500"></spacer>
+      <h2>Evaluation</h2>
 
-    <div id="evaluationGrid">
-      <img src={ConfusionMatrixNormalized} alt="Confusion Matrix" />
-      <img src={PCurve} alt="P Curve" />
-      <img src={PRCurve} alt="PR Curve" />
-      <img src={RCurve} alt="R Curve" />
+      <div id="evaluationGrid">
+        <img src={ConfusionMatrixNormalized} alt="Confusion Matrix" />
+        <img src={PCurve} alt="P Curve" />
+        <img src={PRCurve} alt="PR Curve" />
+        <img src={RCurve} alt="R Curve" />
+      </div>
     </div>
   </div>
 </main>
@@ -144,12 +147,17 @@
     padding-top: 4rem;
     background-color: var(--primary);
     height: 100%;
-    clip-path: polygon(0 5rem, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 5rem, 100% 0, 100% calc(100% + 5rem), 0 100%);
     text-align: center;
   }
 
   .slant-secondary {
     background-color: var(--secondary);
+    clip-path: polygon(0 0, 100% 5rem, 100% 100%, 0 100%);
+  }
+
+  .color-container {
+    background-color: var(--primary);
   }
 
   .slant p {
