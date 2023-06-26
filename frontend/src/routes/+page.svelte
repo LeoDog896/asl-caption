@@ -1,7 +1,7 @@
 <script lang="ts">
   import FileUpload from '$lib/component/FileUpload.svelte';
   import { process } from '$lib/model';
-  import { IconCamera, IconFile } from '@tabler/icons-svelte';
+  import { IconCamera, IconFile, IconLoader } from '@tabler/icons-svelte';
   import type * as tf from '@tensorflow/tfjs';
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
   import { onMount } from 'svelte';
@@ -12,9 +12,11 @@
 
   let file: File | undefined;
   let model: tf.GraphModel<string | tf.io.IOHandler>;
+  let loading = true;
 
   onMount(async () => {
     model = await loadGraphModel(MODEL_URL);
+    loading = false;
   });
 
   $: if (file) {
@@ -63,7 +65,14 @@
           <FileUpload id="file" bind:file>
             <div class="button"><IconFile />From File</div>
           </FileUpload>
-          <button class="button" on:click={openVideo}><IconCamera />From Camera</button>
+          <button class="button" on:click={openVideo} disabled={loading}>
+            {#if loading}
+              <IconLoader class="spin" />
+            {:else}
+              <IconCamera />
+            {/if}
+            From Camera
+          </button>
         </div>
       </div>
     </div>
@@ -93,6 +102,19 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  :global(.spin) {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   #slant {
@@ -184,6 +206,10 @@
 
     width: 14rem;
     height: 100%;
+  }
+
+  .buttons .button:disabled {
+    opacity: 0.5;
   }
 
   .buttons .button:hover {
