@@ -2,25 +2,43 @@
   import FileUpload from '$lib/component/FileUpload.svelte';
   import { process } from '$lib/model';
   import { IconCamera, IconFile, IconLoader } from '@tabler/icons-svelte';
-  import type * as tf from '@tensorflow/tfjs';
+  import * as tf from '@tensorflow/tfjs';
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
   import { onMount } from 'svelte';
   import { openModal } from 'svelte-modals';
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
-  import MODEL_URL from '../model/model.json?url';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
 
+  // Statistic images
   import ConfusionMatrixNormalized from '../images/statistics/confusion_matrix_normalized.png';
   import PCurve from '../images/statistics/P_curve.png';
   import PRCurve from '../images/statistics/PR_curve.png';
   import RCurve from '../images/statistics/R_curve.png';
+
+  // Model files
+  import MODEL_URL from '../model/model.json?url';
+  const shards = import.meta.glob('../model/*.bin', { as: 'url', eager: true })
 
   let file: File | undefined;
   let model: tf.GraphModel<string | tf.io.IOHandler>;
   let loading = true;
 
   onMount(async () => {
-    model = await loadGraphModel(MODEL_URL);
+    model = await loadGraphModel(
+      tf.io.http(MODEL_URL, {
+        fetchFunc: (
+          url: string,
+          init: Parameters<typeof fetch>[1]
+        ) => {
+          const filename = url.split('/').pop() as string;
+          const shard = shards[`../model/${filename}`];
+          if (shard) {
+            return fetch(shard, init);
+          }
+          return fetch(url, init)
+        }
+      })
+    );
     loading = false;
   });
 
@@ -282,6 +300,8 @@
   .buttons .button:hover {
     background-color: var(--secondary-hover);
   }
+
+  
 
   @media (min-width: 700px) {
     .buttons {
