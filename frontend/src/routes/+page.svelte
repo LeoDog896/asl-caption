@@ -49,6 +49,35 @@
       model
     });
   }
+
+  interface Graph {
+    source: string;
+    alt: string;
+    description: string;
+  }
+
+  const graphs: Graph[] = [
+    {
+      source: ConfusionMatrixNormalized,
+      alt: 'Confusion Matrix',
+      description: 'Confusion Matrix'
+    },
+    {
+      source: PCurve,
+      alt: 'P Curve',
+      description: 'P Curve'
+    },
+    {
+      source: PRCurve,
+      alt: 'PR Curve',
+      description: 'PR Curve'
+    },
+    {
+      source: RCurve,
+      alt: 'R Curve',
+      description: 'R Curve'
+    }
+  ]
 </script>
 
 <svelte:head>
@@ -87,7 +116,7 @@
 
     <p>
       We're a group of students who are passionate about closing the gap between the hearing and
-      deaf communities and promoting inclusive communication for all. We firmly believe that
+      deaf communities as well as promoting inclusive communication for all. We firmly believe that
       communication is a fundamental human right and no one should be left behind due to barriers
       caused by hearing differences.
     </p>
@@ -105,10 +134,12 @@
       <h2>Evaluation</h2>
 
       <div id="evaluationGrid">
-        <img src={ConfusionMatrixNormalized} alt="Confusion Matrix" />
-        <img src={PCurve} alt="P Curve" />
-        <img src={PRCurve} alt="PR Curve" />
-        <img src={RCurve} alt="R Curve" />
+        {#each graphs as graph}
+          <div class="graph">
+            <img src={graph.source} alt={graph.alt} />
+            <p>{graph.description}</p>
+          </div>
+        {/each}
       </div>
     </div>
   </div>
@@ -215,11 +246,13 @@
   .buttons {
     display: flex;
     flex-direction: column;
+    background-color: var(--secondary);
   }
 
   /* TODO: i don't quite like the spacing of the icons - this can probably be tinkered with a bit to look better */
   .buttons .button {
     position: relative;
+    display: inline-block !important;
     border: none;
     border-radius: 0;
 
