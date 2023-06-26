@@ -13,7 +13,13 @@
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const { img, boxesData, classesData, scoresData, ratios: [xRatio, yRatio] } = data;
+    const {
+      img,
+      boxesData,
+      classesData,
+      scoresData,
+      ratios: [xRatio, yRatio]
+    } = data;
 
     // resize canvas to match image
     canvas.width = img instanceof HTMLVideoElement ? img.videoWidth : img.width;

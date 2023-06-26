@@ -10,10 +10,10 @@
   import MODEL_URL from '../model/model.json?url';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
 
-  import ConfusionMatrixNormalized from "../images/statistics/confusion_matrix_normalized.png";
-  import PCurve from "../images/statistics/P_curve.png";
-  import PRCurve from "../images/statistics/PR_curve.png";
-  import RCurve from "../images/statistics/R_curve.png";
+  import ConfusionMatrixNormalized from '../images/statistics/confusion_matrix_normalized.png';
+  import PCurve from '../images/statistics/P_curve.png';
+  import PRCurve from '../images/statistics/PR_curve.png';
+  import RCurve from '../images/statistics/R_curve.png';
 
   let file: File | undefined;
   let model: tf.GraphModel<string | tf.io.IOHandler>;
@@ -101,7 +101,7 @@
   </div>
   <div class="color-container">
     <div class="slant slant-secondary">
-      <spacer type="horizontal" width="500" height="500"></spacer>
+      <spacer type="horizontal" width="500" height="500" />
       <h2>Evaluation</h2>
 
       <div id="evaluationGrid">
