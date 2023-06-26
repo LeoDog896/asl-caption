@@ -389,10 +389,9 @@
     background-color: var(--secondary);
   }
 
-  /* TODO: i don't quite like the spacing of the icons - this can probably be tinkered with a bit to look better */
   .buttons .button {
     position: relative;
-    display: inline-block !important;
+    display: flex;
     border: none;
     border-radius: 0;
 
@@ -413,6 +412,8 @@
 
     width: 14rem;
     height: 100%;
+
+    font-weight: 400;
   }
 
   .buttons .button:disabled {
