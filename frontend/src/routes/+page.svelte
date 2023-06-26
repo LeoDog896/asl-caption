@@ -161,7 +161,6 @@
   </div>
   <div class="color-container">
     <div class="slant slant-secondary">
-      <spacer type="horizontal" width="500" height="500" />
       <h2>Evaluation</h2>
       <h3>(hover over for more info!)</h3>
 
