@@ -5,7 +5,8 @@
   import * as tf from '@tensorflow/tfjs';
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
   import { onMount } from 'svelte';
-  import { openModal } from 'svelte-modals';
+  import { getContext } from 'svelte';
+  const { open } = getContext('simple-modal');
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
 
@@ -51,7 +52,7 @@
         img.onload = async () => {
           const data = await process(model, img);
 
-          openModal(ImageDisplay, {
+          open(ImageDisplay, {
             data
           });
         };
@@ -64,7 +65,7 @@
   }
 
   function openVideo() {
-    openModal(VideoDisplay, {
+    open(VideoDisplay, {
       model
     });
   }

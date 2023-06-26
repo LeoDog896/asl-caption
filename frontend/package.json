@@ -18,6 +18,9 @@
     "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-static": "^2.0.2",
     "@sveltejs/kit": "^1.5.0",
+    "@tabler/icons-svelte": "^2.22.0",
+    "@tensorflow/tfjs": "^4.8.0",
+    "@tensorflow/tfjs-converter": "^4.8.0",
     "@types/randomcolor": "^0.5.7",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
@@ -29,17 +32,12 @@
     "randomcolor": "^0.6.2",
     "svelte": "^3.54.0",
     "svelte-check": "^3.0.1",
-    "svelte-modals": "^1.2.1",
+    "svelte-simple-modal": "^1.5.2",
     "tslib": "^2.4.1",
     "typescript": "^5.0.0",
     "unplugin-fonts": "^1.0.3",
     "vite": "^4.3.0",
     "zod": "^3.21.4"
   },
-  "type": "module",
-  "dependencies": {
-    "@tabler/icons-svelte": "^2.22.0",
-    "@tensorflow/tfjs": "^4.8.0",
-    "@tensorflow/tfjs-converter": "^4.8.0"
-  }
+  "type": "module"
 }

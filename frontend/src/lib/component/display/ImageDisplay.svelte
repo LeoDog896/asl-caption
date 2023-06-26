@@ -1,11 +1,8 @@
 <script lang="ts">
   import { type LabelledData, names } from '$lib/model';
-  import Modal from './Modal.svelte';
 
   export let data: LabelledData;
   let canvas: HTMLCanvasElement;
-
-  export let isOpen: boolean;
 
   $: if (data && canvas) {
     const ctx = canvas.getContext('2d')!;
@@ -64,12 +61,8 @@
   }
 </script>
 
-{#if isOpen}
-  <Modal>
-    <slot />
-    <canvas bind:this={canvas} />
-  </Modal>
-{/if}
+<slot />
+<canvas bind:this={canvas} />
 
 <style>
   canvas {
