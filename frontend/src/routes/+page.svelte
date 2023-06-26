@@ -1,28 +1,46 @@
 <script lang="ts">
-  import { backend } from '$lib/backend';
   import FileUpload from '$lib/component/FileUpload.svelte';
+  import { process } from '$lib/model';
   import { IconCamera, IconFile } from '@tabler/icons-svelte';
+  import type * as tf from '@tensorflow/tfjs';
+  import { loadGraphModel } from '@tensorflow/tfjs-converter';
+  import { onMount } from 'svelte';
+  import { openModal } from 'svelte-modals';
+  import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
+  import MODEL_URL from '../model/model.json?url';
+  import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
 
   let file: File | undefined;
+  let model: tf.GraphModel<string | tf.io.IOHandler>;
+
+  onMount(async () => {
+    model = await loadGraphModel(MODEL_URL);
+  });
 
   $: if (file) {
-    const url = backend('upload');
+    if (model) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = async () => {
+          const data = await process(model, img);
 
-    const formData = new FormData();
+          openModal(ImageDisplay, {
+            data
+          });
+        };
 
-    formData.append('file', file);
+        img.src = reader.result as string;
+      };
 
-    fetch(url, {
-      method: 'POST',
-      body: formData
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function openVideo() {
+    openModal(VideoDisplay, {
+      model
+    });
   }
 </script>
 
@@ -45,7 +63,7 @@
           <FileUpload id="file" bind:file>
             <div class="button"><IconFile />From File</div>
           </FileUpload>
-          <button class="button"><IconCamera />From Camera</button>
+          <button class="button" on:click={openVideo}><IconCamera />From Camera</button>
         </div>
       </div>
     </div>
