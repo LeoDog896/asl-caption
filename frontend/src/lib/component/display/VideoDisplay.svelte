@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import ImageDisplay from './ImageDisplay.svelte';
   import { process, type LabelledData } from '$lib/model';
   import type * as tf from '@tensorflow/tfjs';
@@ -19,6 +19,10 @@
         video.srcObject = stream;
         console.log(video.videoWidth);
         video.play();
+      }).catch((err) => {
+        console.error(err);
+        alert('Unable to access webcam - check your permissions or make sure you aren\'t using it in another tab');
+        isOpen = false;
       });
   }
 
