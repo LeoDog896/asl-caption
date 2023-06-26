@@ -17,7 +17,7 @@
 
   // Model files
   import MODEL_URL from '../model/model.json?url';
-  const shards = import.meta.glob('../model/*.bin', { as: 'url', eager: true })
+  const shards = import.meta.glob('../model/*.bin', { as: 'url', eager: true });
 
   let file: File | undefined;
   let model: tf.GraphModel<string | tf.io.IOHandler>;
@@ -26,16 +26,13 @@
   onMount(async () => {
     model = await loadGraphModel(
       tf.io.http(MODEL_URL, {
-        fetchFunc: (
-          url: string,
-          init: Parameters<typeof fetch>[1]
-        ) => {
+        fetchFunc: (url: string, init: Parameters<typeof fetch>[1]) => {
           const filename = url.split('/').pop() as string;
           const shard = shards[`../model/${filename}`];
           if (shard) {
             return fetch(shard, init);
           }
-          return fetch(url, init)
+          return fetch(url, init);
         }
       })
     );
@@ -71,6 +68,7 @@
   interface Graph {
     source: string;
     alt: string;
+    title: string;
     description: string;
   }
 
@@ -78,24 +76,39 @@
     {
       source: ConfusionMatrixNormalized,
       alt: 'Confusion Matrix',
-      description: 'Confusion Matrix'
+      title: 'Confusion Matrix',
+      description: `A Confusion Matrix is a summary
+      of the prediction results during the classification process. We
+      used this to track the model's common mistakes, such as with the
+      letters M and N.`
     },
     {
       source: PCurve,
       alt: 'P Curve',
-      description: 'P Curve'
+      title: 'P Curve',
+      description: `A Precision Confidence curve shows the model's precision
+      at different confidence levels. This helped us evaluate model
+      performance and visualize the relationship between accuracy and confidence
+      thresholds.`
     },
     {
       source: PRCurve,
       alt: 'PR Curve',
-      description: 'PR Curve'
+      title: 'PR Curve',
+      description: `A Precision-Recall Confidence curve depicts the trade-off
+      between precision and recall at different levels of confidence in the model's
+      predictions. The curve demonstrated how the model accurately identified true positives
+      while minimizing false positives.`
     },
     {
       source: RCurve,
       alt: 'R Curve',
-      description: 'R Curve'
+      title: 'R Curve',
+      description: `A Recall Confidence curve keeps track of the Recall (True Positive Rate) of the model
+      as the confidence threshold is increased. This curve was useful for determining the optimal
+      confidence threshold for the model.`
     }
-  ]
+  ];
 </script>
 
 <svelte:head>
@@ -150,12 +163,18 @@
     <div class="slant slant-secondary">
       <spacer type="horizontal" width="500" height="500" />
       <h2>Evaluation</h2>
+      <h3>(hover over for more info!)</h3>
 
       <div id="evaluationGrid">
         {#each graphs as graph}
           <div class="graph">
-            <img src={graph.source} alt={graph.alt} />
-            <p>{graph.description}</p>
+            <div class="display">
+              <img src={graph.source} alt={graph.alt} />
+              <div class="description">
+                <p>{graph.description}</p>
+              </div>
+            </div>
+            <p>{graph.title}</p>
           </div>
         {/each}
       </div>
@@ -174,11 +193,45 @@
     animation: spin 1s linear infinite;
   }
 
+  .graph .display {
+    position: relative;
+  }
+
+  .display img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .graph .description {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: black;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--secondary);
+    opacity: 0;
+    color: white;
+    transition: opacity 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  .graph .description:hover {
+    opacity: 0.9;
+  }
+
   #evaluationGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 1rem;
+    max-width: 1500px;
+    margin: 0 auto;
   }
 
   @keyframes spin {
@@ -301,7 +354,19 @@
     background-color: var(--secondary-hover);
   }
 
-  
+  .graph-info {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary);
+  }
+
+  .graph-info .info {
+    position: relative;
+  }
+
+  .graph-info .info:hover {
+    /*change opacity from 0 to like 50%*/
+  }
 
   @media (min-width: 700px) {
     .buttons {
