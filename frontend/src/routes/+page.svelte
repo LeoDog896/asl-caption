@@ -104,9 +104,9 @@
       source: RCurve,
       alt: 'R Curve',
       title: 'R Curve',
-      description: `A Recall Confidence curve keeps track of the Recall (True Positive Rate) of the model
+      description: `A Recall Confidence curve keeps track of the Recall (true positive rate) of the model
       as the confidence threshold is increased. This curve was useful for determining the optimal
-      confidence threshold for the model.`
+      confidence threshold for our model.`
     }
   ];
 </script>
@@ -170,7 +170,9 @@
           <div class="graph">
             <div class="display">
               <img src={graph.source} alt={graph.alt} />
-              <div class="description">
+              <!-- TODO: -->
+              <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+              <div class="description" tabindex="0">
                 <p>{graph.description}</p>
               </div>
             </div>
@@ -221,7 +223,11 @@
     transition: opacity 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
-  .graph .description:hover {
+  .description:hover {
+    opacity: 0.9;
+  }
+
+  .description:focus {
     opacity: 0.9;
   }
 
