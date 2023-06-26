@@ -15,6 +15,10 @@
   import PRCurve from '../images/statistics/PR_curve.png';
   import RCurve from '../images/statistics/R_curve.png';
 
+  // Team photos
+  import Hazel from '../images/selfies/hazel.png'
+  import Temp from '../images/selfies/temp.jpg'
+
   // Model files
   import MODEL_URL from '../model/model.json?url';
   const shards = import.meta.glob('../model/*.bin', { as: 'url', eager: true });
@@ -146,10 +150,9 @@
     <h2 id="about">About Us</h2>
 
     <p>
-      We're a group of students who are passionate about closing the gap between the hearing and
-      deaf communities as well as promoting inclusive communication for all. We firmly believe that
-      communication is a fundamental human right and no one should be left behind due to barriers
-      caused by hearing differences.
+      We're a group of students who are passionate about promoting inclusive communication for all.
+      We firmly believe that communication is a fundamental human right and no one should be left
+      behind due to barriers caused by hearing differences.
     </p>
 
     <p>
@@ -158,6 +161,15 @@
       and its role in facilitating communication for the deaf community, we have taken the first
       step towards making the world a more accessible place.
     </p>
+
+    <div id="people">
+      <img src={Hazel} alt="Hazel"/>
+      <img src={Temp} alt="Temp" />
+      <img src={Temp} alt="Temp" />
+      <img src={Temp} alt="Temp" />
+      <img src={Temp} alt="Temp" />
+      <img src={Temp} alt="Temp" />
+    </div>
   </div>
   <div class="color-container">
     <div class="slant slant-secondary">
@@ -183,7 +195,16 @@
   </div>
 </main>
 
+<footer>
+  Source on <a href="https://github.com/LeoDog896/asl-caption">GitHub</a>
+</footer>
+
 <style>
+  footer {
+    text-align: center;
+    padding: 1rem;
+  }
+
   .gradient {
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
@@ -202,6 +223,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  #people {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  #people img {
+    margin: 0;
   }
 
   .graph .description {
@@ -357,20 +391,6 @@
 
   .buttons .button:hover {
     background-color: var(--secondary-hover);
-  }
-
-  .graph-info {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--primary);
-  }
-
-  .graph-info .info {
-    position: relative;
-  }
-
-  .graph-info .info:hover {
-    /*change opacity from 0 to like 50%*/
   }
 
   @media (min-width: 700px) {
