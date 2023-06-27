@@ -4,6 +4,15 @@ from flask_cors import CORS
 from werkzeug import exceptions
 from werkzeug.utils import secure_filename
 
+from gradio_client import Client
+
+
+# config
+
+TEMP_FILE = './temp'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+
 # flask setup
 
 app = Flask(__name__)
@@ -12,19 +21,24 @@ CORS(app, resources={
 })
 
 
+# gradio client setup
+
+client = Client('https://diego7167-asl-caption.hf.space/', serialize=False)
+
 # api routes
+
+def allowed_file(filename: str) -> bool:
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/api/upload', methods=['POST'])
 def api_upload():
-    if 'file' not in request.files:
-        return jsonify({'error': 'invalid request: no file part'}), exceptions.BadRequest.code
-    file = request.files.get('file')
+    if request.json['url']:
+        header, data = request.json['url'].split('base64,', 1)
 
-    if file is None or file.filename == '':
-        return jsonify({'error': 'invalid request: no file supplied'}), exceptions.BadRequest.code
-
-    filename = secure_filename(file.filename)
-
-    content = file.stream.read()
-    msg = f'Received file "{filename}" of type "{file.mimetype}" with size of {len(content)}B!'
-    return jsonify({'message': msg}), 200
+        response = client.submit(data, api_name='/predict')
+        
+        return jsonify(response.result())
+    else:
+        return 'not ok!'

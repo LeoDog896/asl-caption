@@ -1,6 +1,7 @@
 <script lang="ts">
   import FileUpload from '$lib/component/FileUpload.svelte';
   import { process } from '$lib/model';
+  import * as backend from "$lib/backend";
   import { IconCamera, IconFile, IconLoader } from '@tabler/icons-svelte';
   import * as tf from '@tensorflow/tfjs';
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
@@ -113,7 +114,7 @@
       reader.onload = () => {
         const img = new Image();
         img.onload = async () => {
-          const data = await process(model, img);
+          const data = await backend.process(img);
 
           open(ImageDisplay, {
             data
