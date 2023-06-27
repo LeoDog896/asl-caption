@@ -5,7 +5,7 @@
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
   import type { Context } from 'svelte-simple-modal';
-  import { process } from '$lib/model';
+  import { spring } from 'svelte/motion';
   import * as tf from '@tensorflow/tfjs';
   import * as backend from '$lib/backend';
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
@@ -73,11 +73,11 @@
   let slider: HTMLDivElement;
   let primaryHand: HTMLImageElement;
   let overlayHand: HTMLImageElement;
-  let cursorX = 0;
+  let cursorX = spring(0);
 
   $: {
     if (slider) {
-      slider.style.left = `${cursorX}px`;
+      slider.style.left = `${$cursorX}px`;
 
       const percent = (slider.offsetLeft / primaryHand.offsetWidth) * 100;
 
@@ -95,7 +95,7 @@
   </h2>
 
   <div class="images">
-    <div class="images-container" on:mousemove|self={(e) => (cursorX = e.offsetX)}>
+    <div class="images-container" on:mousemove|self={(e) => ($cursorX = e.offsetX)}>
       <img
         bind:this={primaryHand}
         class="primary"
