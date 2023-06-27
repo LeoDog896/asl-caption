@@ -202,39 +202,46 @@
       </p>
 
       <div id="evaluationGrid">
-        <Line
-          {data}
-          options={{
-            responsive: true,
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: 'Epoch',
-                  color: 'white'
-                },
-                ticks: {
-                  color: 'white'
-                },
-                grid: {
-                  color: 'rgba(224, 224, 224, 0.2)'
-                }
-              },
-              y: {
-                ticks: {
-                  color: 'white',
-                  major: {
-                    enabled: true
+        <div class="graphContainer">
+          <Line
+            {data}
+            options={{
+              responsive: true,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Epoch',
+                    color: 'white'
+                  },
+                  ticks: {
+                    color: 'white'
+                  },
+                  grid: {
+                    color: 'rgba(224, 224, 224, 0.2)'
                   }
                 },
-                grid: {
-                  color: 'rgba(224, 224, 224, 0.2)'
+                y: {
+                  ticks: {
+                    color: 'white',
+                    major: {
+                      enabled: true
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(224, 224, 224, 0.2)'
+                  }
                 }
-              }
-            },
-            color: 'white'
-          }}
-        />
+              },
+              color: 'white'
+            }}
+          />
+          {#if categories.every(category => !category.checked)}
+            <div class="graphOverlay">
+              <h2>There are currently no datasets enabled. Make sure to check one!</h2>
+            </div>
+          {/if}
+        </div>
 
         {#each categories as category}
           <button
@@ -270,6 +277,10 @@
 </footer>
 
 <style>
+  main {
+    margin-top: 2rem;
+  }
+
   :root {
     --max-width: 1500px;
   }
@@ -335,6 +346,24 @@
   #evaluationGrid {
     max-width: 1500px;
     margin: 0 auto;
+  }
+
+  .graphContainer {
+    position: relative;
+  }
+
+  .graphOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   @keyframes spin {

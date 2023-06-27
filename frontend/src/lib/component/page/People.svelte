@@ -3,6 +3,7 @@
   import Hazel from '../../../images/selfies/hazel.png';
   import Allen from '../../../images/selfies/allen.jpg';
   import Tristan from '../../../images/selfies/tristan.jpg';
+  import Meredith from '../../../images/selfies/meredith.jpg';
   import Temp from '../../../images/selfies/temp.jpg';
 
   interface Person {
@@ -28,9 +29,9 @@
       src: Tristan
     },
     {
-      name: "Temp",
-      description: "Temporary",
-      src: Temp
+      name: "Meredith",
+      description: `Meredith's intro`,
+      src: Meredith
     },
     {
       name: "Temp",
