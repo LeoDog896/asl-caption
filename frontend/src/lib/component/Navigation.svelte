@@ -2,9 +2,9 @@
   let scrollY = 0;
 </script>
 
-<svelte:window bind:scrollY={scrollY} />
+<svelte:window bind:scrollY />
 
-<nav class="{scrollY === 0 ? 'top' : ''}">
+<nav class={scrollY === 0 ? 'top' : ''}>
   <div class="wrapper">
     <h1><a href="/">ASL Caption</a></h1>
 
@@ -19,7 +19,7 @@
   .top {
     border-bottom: 2px solid rgba(0, 0, 0, 0);
   }
-  
+
   nav {
     position: fixed;
     top: 0;

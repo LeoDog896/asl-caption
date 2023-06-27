@@ -9,7 +9,7 @@
   interface Person {
     name: string;
     description: string;
-    src: string
+    src: string;
   }
 
   const people: Person[] = [
@@ -31,22 +31,22 @@
       src: Tristan
     },
     {
-      name: "Meredith",
+      name: 'Meredith',
       description: `Hello, I'm Meredith Lo. I am a rising junior at Great Oak High School and
       I like to spend my time drawing, making games, and baking. I worked on the frontend with Tristan.`,
       src: Meredith
     },
     {
-      name: "Temp",
-      description: "Temporary",
+      name: 'Temp',
+      description: 'Temporary',
       src: Temp
     },
     {
-      name: "Temp",
-      description: "Temporary",
+      name: 'Temp',
+      description: 'Temporary',
       src: Temp
     }
-  ]
+  ];
 </script>
 
 <div id="people">
@@ -61,7 +61,7 @@
 </div>
 
 <style>
-   #people {
+  #people {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -99,8 +99,4 @@
   .person:hover .description {
     bottom: 0;
   }
-
-
 </style>
-
-

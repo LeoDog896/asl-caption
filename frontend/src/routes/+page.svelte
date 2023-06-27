@@ -6,7 +6,7 @@
   import type { Context } from 'svelte-simple-modal';
   const { open } = getContext<Context>('simple-modal');
   import type * as cjs from 'chart.js';
-  import People from "$lib/component/page/People.svelte";
+  import People from '$lib/component/page/People.svelte';
 
   // Statistics
   import { Line } from 'svelte-chartjs';
@@ -111,7 +111,7 @@
 </svelte:head>
 
 <main>
-  <Landing></Landing>
+  <Landing />
   <div class="slant">
     <h2 id="about">About Us</h2>
 
@@ -130,15 +130,16 @@
 
     <h3 style="font-size: 35px">Our Team</h3>
 
-    <People></People>
+    <People />
   </div>
   <div class="color-container">
     <div class="slant slant-secondary">
       <h2>Evaluation</h2>
 
       <p>
-        We ran our model on <a style="color: var(--text-bold)" href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project"
-          >our ASL dataset</a
+        We ran our model on <a
+          style="color: var(--text-bold)"
+          href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project">our ASL dataset</a
         > for 100 epochs. Here are the results.
       </p>
       <p>
@@ -180,7 +181,7 @@
               color: 'white'
             }}
           />
-          {#if categories.every(category => !category.checked)}
+          {#if categories.every((category) => !category.checked)}
             <div class="graphOverlay">
               <h2>There are currently no datasets enabled. Make sure to check one!</h2>
             </div>
@@ -241,7 +242,8 @@
     transition: background-color 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
-  .categorySwitch:hover, .categorySwitch.checked {
+  .categorySwitch:hover,
+  .categorySwitch.checked {
     background-color: var(--secondary-hover);
   }
 

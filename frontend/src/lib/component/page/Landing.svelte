@@ -7,15 +7,15 @@
   import type { Context } from 'svelte-simple-modal';
   import { process } from '$lib/model';
   import * as tf from '@tensorflow/tfjs';
-  import * as backend from "$lib/backend";
+  import * as backend from '$lib/backend';
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
   import { onMount } from 'svelte';
   import { getContext } from 'svelte';
   const { open } = getContext<Context>('simple-modal');
 
   // Hand images
-  import LabeledHand from "../../../images/hands/landing.png";
-  import UnlabeledHand from "../../../images/hands/landing-unlabeled.png";
+  import LabeledHand from '../../../images/hands/landing.png';
+  import UnlabeledHand from '../../../images/hands/landing-unlabeled.png';
 
   let loading = true;
 
@@ -50,7 +50,7 @@
         const img = new Image();
         img.onload = async () => {
           const data = await backend.process(img);
-          console.log("data:", data);
+          console.log('data:', data);
 
           open(ImageDisplay, {
             data
@@ -79,13 +79,12 @@
     if (slider) {
       slider.style.left = `${cursorX}px`;
 
-      const percent = slider.offsetLeft / primaryHand.offsetWidth * 100;
+      const percent = (slider.offsetLeft / primaryHand.offsetWidth) * 100;
 
-      overlayHand.style.clipPath = `polygon(0% 100%, ${percent}% 100%, ${percent}% 0, 0% 0)`
+      overlayHand.style.clipPath = `polygon(0% 100%, ${percent}% 100%, ${percent}% 0, 0% 0)`;
     }
   }
 </script>
-
 
 <div class="landing" transition:fly={{ y: 200, duration: 1000 }}>
   <h1>See the <span class="gradient">world</span> speak.</h1>
@@ -96,13 +95,27 @@
   </h2>
 
   <div class="images">
-    <div class="images-container" on:mousemove|self={e => cursorX = e.offsetX}>
-      <img bind:this={primaryHand} class="primary" src={UnlabeledHand} id="hand2" alt="Hand doing the ASL pose for 'R'."/>
-      <img bind:this={overlayHand} class="overlay" src={LabeledHand} id="hand" alt="Hand doing the ASL pose for 'R'." />
+    <div class="images-container" on:mousemove|self={(e) => (cursorX = e.offsetX)}>
+      <img
+        bind:this={primaryHand}
+        class="primary"
+        src={UnlabeledHand}
+        id="hand2"
+        alt="Hand doing the ASL pose for 'R'."
+      />
+      <img
+        bind:this={overlayHand}
+        class="overlay"
+        src={LabeledHand}
+        id="hand"
+        alt="Hand doing the ASL pose for 'R'."
+      />
       <div class="slider" bind:this={slider}>
-        <p>hover<br/>
-          over<br/>
-          me!</p>
+        <p>
+          hover<br />
+          over<br />
+          me!
+        </p>
       </div>
     </div>
   </div>
@@ -155,7 +168,9 @@
     transform: translateX(-50%);
   }
 
-  .primary, .overlay, .slider {
+  .primary,
+  .overlay,
+  .slider {
     /* stops offsetX being transferred to the child elements */
     pointer-events: none;
   }
@@ -163,15 +178,15 @@
   .overlay {
     clip-path: polygon(0% 100%, 0% 100%, 0% 0, 0% 0);
   }
-  
+
   .slider {
     position: absolute;
     top: 0;
     width: 0.2rem;
     height: 80%;
-    background-color: #8027E0;
+    background-color: #8027e0;
   }
-  
+
   .slider p {
     transform: rotate(9deg) translate(1rem, -1rem);
   }
