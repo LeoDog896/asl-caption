@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
+  import { fade, fly } from 'svelte/transition';
   import FileUpload from '$lib/component/FileUpload.svelte';
   import { IconCamera, IconFile, IconLoader } from '@tabler/icons-svelte';
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
@@ -74,12 +74,19 @@
   let primaryHand: HTMLImageElement;
   let overlayHand: HTMLImageElement;
   let cursorX = spring(0);
+  let tooltipEnabled = true;
 
   $: {
     if (slider) {
       slider.style.left = `${$cursorX}px`;
 
       const percent = (slider.offsetLeft / primaryHand.offsetWidth) * 100;
+
+      if (percent > 60) {
+        tooltipEnabled = false;
+      } else {
+        tooltipEnabled = true;
+      }
 
       overlayHand.style.clipPath = `polygon(0% 100%, ${percent}% 100%, ${percent}% 0, 0% 0)`;
     }
@@ -111,11 +118,13 @@
         alt="Hand doing the ASL pose for 'R'."
       />
       <div class="slider" bind:this={slider}>
-        <p>
-          hover<br />
-          over<br />
-          me!
-        </p>
+        {#if tooltipEnabled}
+          <p transition:fade={{ duration: 500 }}>
+            hover<br />
+            over<br />
+            me!
+          </p>
+        {/if}
       </div>
     </div>
   </div>
@@ -182,9 +191,9 @@
   .slider {
     position: absolute;
     top: 0;
-    width: 0.2rem;
+    width: 0;
+    border-left: 0.2rem dashed #8027e0;
     height: 72.6%;
-    background-color: #8027e0;
   }
 
   .slider p {
