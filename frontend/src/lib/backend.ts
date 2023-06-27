@@ -30,15 +30,22 @@ export async function process(img: HTMLImageElement): Promise<LabelledData> {
 
   const data = await response.json();
 
-  const boxesData = new Float32Array(transpose(data[0].box));
-  const scoresData = new Float32Array([data[0].conf]);
-  const classesData = new Uint8Array([data[0].cls]);
+  const boxes = [];
+  const scores = [];
+  const classes = [];
+
+  for (const key in data) {
+    const res = data[key];
+    boxes.push(...transpose<number>(res["box"]));
+    scores.push(res["conf"]);
+    classes.push(res["cls"]);
+  }
 
   return {
     img,
-    boxesData,
-    scoresData,
-    classesData,
+    boxesData: new Float32Array(boxes),
+    scoresData: new Float32Array(scores),
+    classesData: new Uint8Array(classes),
     ratios: [1, 1]
   }
 }
