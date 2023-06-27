@@ -50,7 +50,6 @@
         const img = new Image();
         img.onload = async () => {
           const data = await backend.process(img);
-          console.log('data:', data);
 
           open(ImageDisplay, {
             data
@@ -221,7 +220,7 @@
   .buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     background-color: var(--secondary);
   }
 
@@ -253,7 +252,6 @@
     gap: 0.2em;
 
     width: 14rem;
-    height: 100%;
 
     font-weight: 400;
   }
