@@ -14,11 +14,11 @@
   /* color variables */
 
   --dark-background: #191627;
-  --light-background: #f7ece1;
+  --light-background: #fefefe;
   --primary: #995fa3;
-  --secondary: #8d86c9;
-  --secondary-hover: #7d76b9;
-  --test-color: #a8a8ec;
+  --secondary: #00b3b3;
+  --secondary-hover: #009999;
+  --test-color: var(--secondary);
   --text-bold: #ffadff;
 
   /* default dark colorscheme */
@@ -39,7 +39,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --text: black;
+    --background-text: black;
     --background: var(--light-background);
 
     --shadow-color: #4444;
