@@ -147,7 +147,7 @@
       in all media.
     </h2>
 
-    <img src="landing.png" alt="Hand doing the ASL pose for 'R'." />
+    <img src="landing.png" id="hand" alt="Hand doing the ASL pose for 'R'." />
 
     <div class="container">
       <div id="upload">
