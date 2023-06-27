@@ -11,6 +11,7 @@
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
   import type * as cjs from 'chart.js';
+  import { fly } from 'svelte/transition';
 
   // Statistics
   import { Line } from 'svelte-chartjs';
@@ -27,16 +28,20 @@
   interface Category {
     name: string;
     labels: string[];
+    checked: boolean;
+    checkbox?: HTMLInputElement;
   }
 
   const categories: Category[] = [
     {
       name: 'Loss',
-      labels: ['box_loss', 'cls_loss', 'dfl_loss']
+      labels: ['box_loss', 'cls_loss', 'dfl_loss'],
+      checked: true
     },
     {
       name: 'Precision & Recall',
-      labels: ['precision', 'recall', 'mAP50', 'mAP50-95']
+      labels: ['precision', 'recall', 'mAP50', 'mAP50-95'],
+      checked: true
     }
   ];
 
@@ -51,6 +56,11 @@
     });
     return acc;
   }, {});
+
+  interface Intros {
+    name: string;
+    desc: string;
+  }
 
   const defaultOptions: Partial<cjs.ChartDataset<'line', number[]>> = {
     borderCapStyle: 'butt',
@@ -78,6 +88,8 @@
 
   // Team photos
   import Hazel from '../images/selfies/hazel.png';
+  import Allen from '../images/selfies/allen.jpg';
+  import Tristan from '../images/selfies/tristan.jpg'
   import Temp from '../images/selfies/temp.jpg';
 
   // Model files
@@ -137,7 +149,7 @@
 </svelte:head>
 
 <main>
-  <div class="landing">
+  <div class="landing" transition:fly={{ y: 200, duration: 1000 }}>
     <h1>See the <span class="gradient">world</span> speak.</h1>
 
     <h2>
@@ -186,8 +198,8 @@
 
     <div id="people">
       <img src={Hazel} alt="Hazel" />
-      <img src={Temp} alt="Temp" />
-      <img src={Temp} alt="Temp" />
+      <img src={Allen} alt="Allen" />
+      <img src={Tristan} alt="Tristan" />
       <img src={Temp} alt="Temp" />
       <img src={Temp} alt="Temp" />
       <img src={Temp} alt="Temp" />
@@ -198,7 +210,7 @@
       <h2>Evaluation</h2>
 
       <p>
-        We ran our model on <a href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project"
+        We ran our model on <a style="color: var(--text-bold)" href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project"
           >our ASL dataset</a
         > for 100 epochs. Here are the results.
       </p>
@@ -218,10 +230,8 @@
                   text: 'Epoch',
                   color: 'white'
                 },
-                // make it go from 0 - 100 with steps of 10
                 ticks: {
-                  color: 'white',
-                  stepSize: 10,
+                  color: 'white'
                 },
                 grid: {
                   color: 'rgba(224, 224, 224, 0.2)'
@@ -245,19 +255,27 @@
 
         {#each categories as category}
           <button
-            class="categorySwitch"
-            on:click={() => {
-              for (const datasetName of category.labels) {
-                const dataset = datasets.find((dataset) => dataset.label === datasetName);
-
-                if (dataset) {
-                  dataset.hidden = !dataset.hidden;
-                }
-              }
-
-              data = data;
-            }}>{category.name}</button
+            class="categorySwitch {category.checked ? 'checked' : ''}"
+            on:click={() => category.checkbox?.click()}
           >
+            <input
+              type="checkbox"
+              bind:this={category.checkbox}
+              bind:checked={category.checked}
+              on:change={() => {
+                for (const datasetName of category.labels) {
+                  const dataset = datasets.find((dataset) => dataset.label === datasetName);
+
+                  if (dataset) {
+                    dataset.hidden = !category.checked;
+                  }
+                }
+
+                data = data;
+              }}
+            />
+            {category.name}
+          </button>
         {/each}
       </div>
     </div>
@@ -274,6 +292,7 @@
   }
 
   .categorySwitch {
+    display: inline-block;
     cursor: pointer;
     font-weight: 800;
     padding: 0.5rem;
@@ -284,7 +303,7 @@
     transition: background-color 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
-  .categorySwitch:hover {
+  .categorySwitch:hover, .categorySwitch.checked {
     background-color: var(--secondary-hover);
   }
 
@@ -299,7 +318,6 @@
     padding: 1rem;
   }
 
-  /* animate the gradient */
   .gradient {
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
@@ -339,6 +357,8 @@
     margin: 0 auto;
   }
 
+  
+
   #people img {
     margin: 0;
   }
@@ -368,7 +388,7 @@
   }
 
   .slant-secondary {
-    background-color: var(--test-color);
+    background-color: #00b3b3;
     clip-path: polygon(0 0, 100% 5rem, 100% 100%, 0 100%);
   }
 
@@ -384,19 +404,6 @@
 
   .landing {
     padding: 2rem;
-    animation: entry 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
-
-  @keyframes entry {
-    0% {
-      opacity: 0;
-      transform: translateY(2rem);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   h1 {
@@ -444,7 +451,6 @@
   .buttons {
     display: flex;
     flex-direction: column;
-    /* center horizontally */
     justify-content: center;
     align-items: center;
     background-color: var(--secondary);
