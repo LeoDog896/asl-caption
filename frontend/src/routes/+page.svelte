@@ -10,11 +10,85 @@
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
 
-  // Statistic images
-  import ConfusionMatrixNormalized from '../images/statistics/confusion_matrix_normalized.png';
-  import PCurve from '../images/statistics/P_curve.png';
-  import PRCurve from '../images/statistics/PR_curve.png';
-  import RCurve from '../images/statistics/R_curve.png';
+  // Statistics
+  import { Line } from 'svelte-chartjs'
+  import 'chart.js/auto';
+  import results from "../stats/results.csv"
+  const parsedResults = results.map(result => 
+    Object.fromEntries(Object.entries(result).map(([key, value]) => [key.trim(), value.trim()]))
+  );
+
+  const labels = parsedResults.map(result => result.epoch);
+
+  const rawData = parsedResults.reduce((acc, result) => {
+    Object.entries(result).forEach(([key, value]) => {
+      if (key !== "epoch") {
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(value);
+      }
+    });
+    return acc;
+  }, {} as Record<string, string[]>);
+
+  console.log(rawData)
+
+  const colors = [
+    "#5EB1BF",
+    "#D81E5B",
+    "#2E4057",
+    "#C6AC8F",
+    "#04724D",
+    "#F7FE72",
+    "#90F1EF",
+    "#FFD6E0",
+    "#D5A021",
+    "#30638E",
+    "#EDAE49",
+    "#5F4BB6"
+  ]
+
+  const defaultOptions = Object.freeze({
+    borderCapStyle: "butt",
+    borderDash: [],
+    borderDashOffset: 0.0,
+    borderJoinStyle: "miter",
+    pointBorderColor: "rgb(205, 130,1 58)",
+    pointBackgroundColor: "rgb(255, 255, 255)",
+    pointBorderWidth: 10,
+    pointHoverRadius: 5,
+    pointHoverBackgroundColor: "rgb(0, 0, 0)",
+    pointHoverBorderColor: "rgba(220, 220, 220,1)",
+    pointHoverBorderWidth: 2,
+    pointRadius: 0,
+    pointHitRadius: 10,
+  })
+
+  let data: import("chart.js").ChartData<"line", (number | import("chart.js").Point)[], unknown> = {
+    labels,
+    datasets: [
+      // {
+      //   label: "My First dataset",
+      //   borderColor: "rgb(205, 130, 158)",
+      //   ...defaultOptions,
+      //   data: [65, 59, 80, 81, 56, 55, 40]
+      // },
+      // {
+      //   label: "My Second dataset",
+      //   borderColor: "rgb(35, 26, 136)",
+      //   ...defaultOptions,
+      //   data: [28, 48, 40, 19, 86, 27, 90]
+      // }
+      ...Object.entries(rawData).map(([key, values], index) => ({
+        label: key,
+        borderColor: colors[index],
+        ...defaultOptions,
+        data: values.map(value => parseFloat(value))
+      }))
+    ],
+  };
+  
 
   // Team photos
   import Hazel from '../images/selfies/hazel.png'
@@ -69,51 +143,6 @@
       model
     });
   }
-
-  interface Graph {
-    source: string;
-    alt: string;
-    title: string;
-    description: string;
-  }
-
-  const graphs: Graph[] = [
-    {
-      source: ConfusionMatrixNormalized,
-      alt: 'Confusion Matrix',
-      title: 'Confusion Matrix',
-      description: `A Confusion Matrix is a summary
-      of the prediction results during the classification process. We
-      used this to track the model's common mistakes, such as with the
-      letters M and N.`
-    },
-    {
-      source: PCurve,
-      alt: 'P Curve',
-      title: 'P Curve',
-      description: `A Precision Confidence curve shows the model's precision
-      at different confidence levels. This helped us evaluate model
-      performance and visualize the relationship between accuracy and confidence
-      thresholds.`
-    },
-    {
-      source: PRCurve,
-      alt: 'PR Curve',
-      title: 'PR Curve',
-      description: `A Precision-Recall Confidence curve depicts the trade-off
-      between precision and recall at different levels of confidence in the model's
-      predictions. The curve demonstrated how the model accurately identified true positives
-      while minimizing false positives.`
-    },
-    {
-      source: RCurve,
-      alt: 'R Curve',
-      title: 'R Curve',
-      description: `A Recall Confidence curve keeps track of the Recall (true positive rate) of the model
-      as the confidence threshold is increased. This curve was useful for determining the optimal
-      confidence threshold for our model.`
-    }
-  ];
 </script>
 
 <svelte:head>
@@ -124,7 +153,7 @@
   <div class="landing">
     <h1>See the <span class="gradient">world</span> speak.</h1>
 
-    <h2>We translate ASL to English in all media.</h2>
+    <h2>We translate <a href="https://www.nidcd.nih.gov/health/american-sign-language">ASL</a> to English in all media.</h2>
 
     <img src="landing.png" alt="Hand doing the ASL pose for 'R'." />
 
@@ -177,22 +206,22 @@
   <div class="color-container">
     <div class="slant slant-secondary">
       <h2>Evaluation</h2>
-      <h3>(hover over for more info!)</h3>
 
       <div id="evaluationGrid">
-        {#each graphs as graph}
+        <!-- {#each graphs as graph}
           <div class="graph">
             <div class="display">
               <img src={graph.source} alt={graph.alt} />
-              <!-- TODO: -->
-              <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+              TODO: -->
+              <!-- svelte-ignore a11y-no-noninteractive-tabindex
               <div class="description" tabindex="0">
                 <p>{graph.description}</p>
               </div>
             </div>
             <p>{graph.title}</p>
           </div>
-        {/each}
+        {/each} -->
+        <Line {data} options={{ responsive: true }}></Line>
       </div>
     </div>
   </div>
@@ -228,16 +257,6 @@
     animation: spin 1s linear infinite;
   }
 
-  .graph .display {
-    position: relative;
-  }
-
-  .display img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   p {
     max-width: 1500px;
     margin: 2rem auto;
@@ -254,31 +273,6 @@
 
   #people img {
     margin: 0;
-  }
-
-  .graph .description {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    background-color: var(--secondary);
-    opacity: 0;
-    color: whitesmoke;
-    transition: opacity 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
-
-  .description:hover {
-    opacity: 0.9;
-  }
-
-  .description:focus {
-    opacity: 0.9;
   }
 
   #evaluationGrid {
