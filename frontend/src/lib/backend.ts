@@ -7,6 +7,15 @@ export function url(path: string): string {
   else return BACKEND_URL + '/' + path;
 }
 
+function transpose<T>(src: T[]): T[] {
+  return [
+    src[1],
+    src[0],
+    src[3],
+    src[2]
+  ];
+}
+
 export async function process(img: HTMLImageElement): Promise<LabelledData> {
   const body = {
     url: img.src
@@ -20,16 +29,16 @@ export async function process(img: HTMLImageElement): Promise<LabelledData> {
   });
 
   const data = await response.json();
-  console.log(data);
 
-  const boxesData = new Float32Array(data);
-  const blank = new Uint8Array();
+  const boxesData = new Float32Array(transpose(data[0].box));
+  const scoresData = new Float32Array([data[0].conf]);
+  const classesData = new Uint8Array([data[0].cls]);
 
   return {
     img,
     boxesData,
-    scoresData: blank,
-    classesData: blank,
+    scoresData,
+    classesData,
     ratios: [1, 1]
   }
 }

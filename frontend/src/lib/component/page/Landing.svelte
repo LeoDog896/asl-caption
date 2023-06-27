@@ -50,6 +50,7 @@
         const img = new Image();
         img.onload = async () => {
           const data = await backend.process(img);
+          console.log("data:", data);
 
           open(ImageDisplay, {
             data
