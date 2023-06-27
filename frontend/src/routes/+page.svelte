@@ -1,10 +1,4 @@
 <script lang="ts">
-  import * as tf from '@tensorflow/tfjs';
-  import { loadGraphModel } from '@tensorflow/tfjs-converter';
-  import { onMount } from 'svelte';
-  import { getContext } from 'svelte';
-  import type { Context } from 'svelte-simple-modal';
-  const { open } = getContext<Context>('simple-modal');
   import type * as cjs from 'chart.js';
   import People from '$lib/component/page/People.svelte';
 
@@ -77,33 +71,9 @@
     labels,
     datasets
   };
-
-  // Team photos
-  import Hazel from '../images/selfies/hazel.png';
-  import Temp from '../images/selfies/temp.jpg';
-
   // Model files
   import MODEL_URL from '../model/model.json?url';
   const shards = import.meta.glob('../model/*.bin', { as: 'url', eager: true });
-
-  let model: tf.GraphModel<string | tf.io.IOHandler>;
-  let loading = true;
-
-  onMount(async () => {
-    model = await loadGraphModel(
-      tf.io.http(MODEL_URL, {
-        fetchFunc: (url: string, init: Parameters<typeof fetch>[1]) => {
-          const filename = url.split('/').pop() as string;
-          const shard = shards[`../model/${filename}`];
-          if (shard) {
-            return fetch(shard, init);
-          }
-          return fetch(url, init);
-        }
-      })
-    );
-    loading = false;
-  });
 </script>
 
 <svelte:head>
