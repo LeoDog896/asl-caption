@@ -12,6 +12,7 @@
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
   import type * as cjs from 'chart.js';
   import { fly } from 'svelte/transition';
+  import People from "$lib/component/page/People.svelte";
 
   // Statistics
   import { Line } from 'svelte-chartjs';
@@ -57,11 +58,6 @@
     return acc;
   }, {});
 
-  interface Intros {
-    name: string;
-    desc: string;
-  }
-
   const defaultOptions: Partial<cjs.ChartDataset<'line', number[]>> = {
     borderCapStyle: 'butt',
     borderDash: [],
@@ -85,12 +81,6 @@
     labels,
     datasets
   };
-
-  // Team photos
-  import Hazel from '../images/selfies/hazel.png';
-  import Allen from '../images/selfies/allen.jpg';
-  import Tristan from '../images/selfies/tristan.jpg'
-  import Temp from '../images/selfies/temp.jpg';
 
   // Model files
   import MODEL_URL from '../model/model.json?url';
@@ -196,14 +186,7 @@
 
     <h3 style="font-size: 35px">Our Team</h3>
 
-    <div id="people">
-      <img src={Hazel} alt="Hazel" />
-      <img src={Allen} alt="Allen" />
-      <img src={Tristan} alt="Tristan" />
-      <img src={Temp} alt="Temp" />
-      <img src={Temp} alt="Temp" />
-      <img src={Temp} alt="Temp" />
-    </div>
+    <People></People>
   </div>
   <div class="color-container">
     <div class="slant slant-secondary">
@@ -346,21 +329,6 @@
   p {
     max-width: 1500px;
     margin: 2rem auto;
-  }
-
-  #people {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-
-  
-
-  #people img {
-    margin: 0;
   }
 
   #evaluationGrid {
