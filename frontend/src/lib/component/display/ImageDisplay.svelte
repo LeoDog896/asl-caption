@@ -48,13 +48,13 @@
       ctx.globalAlpha = 1;
 
       // draw a box around the class name
+      ctx.font = '20px Arial';
       const text = `${name} @ ${scoreData}%`;
       const textWidth = ctx.measureText(text).width;
       ctx.fillStyle = color;
-      ctx.fillRect(x * xRatio, y * yRatio - 20, textWidth + 30, 20);
+      ctx.fillRect(x * xRatio, y * yRatio - 20, textWidth, 20);
 
       // draw the class name
-      ctx.font = '20px Arial';
       ctx.fillStyle = 'white';
       ctx.fillText(text, x * xRatio, y * yRatio - 5);
     }
