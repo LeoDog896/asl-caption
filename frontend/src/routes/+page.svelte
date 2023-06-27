@@ -22,10 +22,7 @@
 
   const labels = parsedResults.map((result) => result.epoch);
 
-  const dataFilters = [
-    "epoch",
-    "lr/"
-  ]
+  const dataFilters = ['epoch', 'lr/'];
 
   interface Category {
     name: string;
@@ -34,14 +31,14 @@
 
   const categories: Category[] = [
     {
-      name: "Loss",
-      labels: ["box_loss", "cls_loss", "dfl_loss"]
+      name: 'Loss',
+      labels: ['box_loss', 'cls_loss', 'dfl_loss']
     },
     {
-      name: "Precision & Recall",
-      labels: ["precision", "recall", "mAP50", "mAP50-95"]
-    },
-  ]
+      name: 'Precision & Recall',
+      labels: ['precision', 'recall', 'mAP50', 'mAP50-95']
+    }
+  ];
 
   const rawData = parsedResults.reduce((acc: Record<string, string[]>, result) => {
     Object.entries(result).forEach(([key, value]) => {
@@ -72,11 +69,11 @@
     label: key,
     ...defaultOptions,
     data: values.map((value) => parseFloat(value))
-  }))
+  }));
 
   let data: cjs.ChartData<'line', number[], unknown> = {
     labels,
-    datasets,
+    datasets
   };
 
   // Team photos
@@ -95,6 +92,7 @@
     model = await loadGraphModel(
       tf.io.http(MODEL_URL, {
         fetchFunc: (url: string, init: Parameters<typeof fetch>[1]) => {
+          // since Vite adds extra hashes to the filenames, we need to transform the requests to the hashed filenames
           const filename = url.split('/').pop() as string;
           const shard = shards[`../model/${filename}`];
           if (shard) {
@@ -162,7 +160,7 @@
             {:else}
               <IconCamera />
             {/if}
-            From Camera
+            Live Camera
           </button>
         </div>
       </div>
@@ -199,10 +197,19 @@
     <div class="slant slant-secondary">
       <h2>Evaluation</h2>
 
+      <p>
+        We ran our model on <a href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project"
+          >our ASL dataset</a
+        > for 100 epochs. Here are the results.
+      </p>
+      <p>
+        <sub>(You can filter between loss or accuracy by clicking on the category buttons.)</sub>
+      </p>
+
       <div id="evaluationGrid">
-        <Line 
+        <Line
           {data}
-          options={{ 
+          options={{
             responsive: true,
             scales: {
               x: {
@@ -211,8 +218,10 @@
                   text: 'Epoch',
                   color: 'white'
                 },
+                // make it go from 0 - 100 with steps of 10
                 ticks: {
-                  color: 'white'
+                  color: 'white',
+                  stepSize: 10,
                 },
                 grid: {
                   color: 'rgba(224, 224, 224, 0.2)'
@@ -228,28 +237,27 @@
                 grid: {
                   color: 'rgba(224, 224, 224, 0.2)'
                 }
-              },
+              }
             },
-            color: 'white',
-            font: {
-              family: "'Inter Variable', sans-serif",
-              weight: "900"
-            }
+            color: 'white'
           }}
         />
 
         {#each categories as category}
-          <button class="categorySwitch" on:click={() => {
-            for (const datasetName of category.labels) {
-              const dataset = datasets.find(dataset => dataset.label === datasetName);
+          <button
+            class="categorySwitch"
+            on:click={() => {
+              for (const datasetName of category.labels) {
+                const dataset = datasets.find((dataset) => dataset.label === datasetName);
 
-              if (dataset) {
-                dataset.hidden = !dataset.hidden;
+                if (dataset) {
+                  dataset.hidden = !dataset.hidden;
+                }
               }
-            }
 
-            data = data
-          }}>{category.name}</button>
+              data = data;
+            }}>{category.name}</button
+          >
         {/each}
       </div>
     </div>
@@ -266,6 +274,7 @@
   }
 
   .categorySwitch {
+    cursor: pointer;
     font-weight: 800;
     padding: 0.5rem;
     color: white;
@@ -276,7 +285,7 @@
   }
 
   .categorySwitch:hover {
-    background-color: var(--primary);
+    background-color: var(--secondary-hover);
   }
 
   .small-call {
@@ -290,12 +299,28 @@
     padding: 1rem;
   }
 
+  /* animate the gradient */
   .gradient {
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: gradient 5s ease-in-out infinite;
+    background-size: 200% 400%;
   }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
   :global(.spin) {
     animation: spin 1s linear infinite;
   }
@@ -419,6 +444,9 @@
   .buttons {
     display: flex;
     flex-direction: column;
+    /* center horizontally */
+    justify-content: center;
+    align-items: center;
     background-color: var(--secondary);
   }
 

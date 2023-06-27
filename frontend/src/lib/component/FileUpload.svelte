@@ -1,7 +1,7 @@
 <script lang="ts">
   export let id: string;
   export let accept: string | undefined = undefined;
-  export let required: boolean = true;
+  export let required = true;
 
   export let file: File | undefined;
 
@@ -12,19 +12,13 @@
   };
 </script>
 
-<div class="wrapper">
-  <label for={id}>
-    <slot />
-  </label>
+<label for={id}>
+  <slot />
+</label>
 
-  <input type="file" {id} {accept} {required} bind:this={input} on:change={change} />
-</div>
+<input type="file" {id} {accept} {required} bind:this={input} on:change={change} />
 
 <style>
-  .wrapper {
-    display: relative;
-  }
-
   label {
     display: contents;
   }

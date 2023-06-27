@@ -16,9 +16,9 @@
   --dark-background: #191627;
   --light-background: #f7ece1;
   --primary: #995fa3;
-  --secondary: #8d86c9;
-  --secondary-hover: #7d76b9;
-  --test-color: #a8a8ec;
+  --secondary: #2d93ad;
+  --secondary-hover: #216e82;
+  --test-color: var(--secondary);
   --text-bold: #ffadff;
 
   /* default dark colorscheme */
