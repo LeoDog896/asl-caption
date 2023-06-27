@@ -6,7 +6,8 @@
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
   import { onMount } from 'svelte';
   import { getContext } from 'svelte';
-  const { open } = getContext('simple-modal');
+  import type { Context } from 'svelte-simple-modal';
+  const { open } = getContext<Context>('simple-modal');
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
   import type * as cjs from 'chart.js';
