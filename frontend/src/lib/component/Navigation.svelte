@@ -43,7 +43,7 @@
   .links a {
     font-weight: 700;
     font-size: 1.2rem;
-    color: var(--text);
+    color: var(--background-text);
     padding: 0.2rem 0.5rem;
     margin: 1rem 0.5rem;
     transition: all 0.2s ease-in-out;
