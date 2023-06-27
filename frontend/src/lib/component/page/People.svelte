@@ -20,17 +20,20 @@
     },
     {
       name: 'Allen',
-      description: `Allen's intro`,
+      description: `My name is Allen Feng, and I'm currently a rising senior at Science Hill High School in Tennessee.
+      I enjoy playing music, video games, and coding.`,
       src: Allen
     },
     {
       name: 'Tristan',
-      description: `Tristan's intro`,
+      description: `I'm Tristan, and I have a passion for computer science and software engineering.
+      I like to play the piano and collaborate on projects. I worked on the frontend along with Meredith.`,
       src: Tristan
     },
     {
       name: "Meredith",
-      description: `Meredith's intro`,
+      description: `Hello, I'm Meredith Lo. I am a rising junior at Great Oak High School and
+      I like to spend my time drawing, making games, and baking. I worked on the frontend with Tristan.`,
       src: Meredith
     },
     {

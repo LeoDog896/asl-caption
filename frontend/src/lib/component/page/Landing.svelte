@@ -67,10 +67,26 @@
       model
     });
   }
+
+  let slider: HTMLDivElement;
+  let primaryHand: HTMLImageElement;
+  let overlayHand: HTMLImageElement;
+  let cursorX = 0;
+
+  $: {
+    if (slider) {
+      console.log(cursorX)
+      slider.style.left = `${cursorX}px`;
+
+      const percent = slider.offsetLeft / primaryHand.offsetWidth * 100;
+
+      overlayHand.style.clipPath = `polygon(0% 100%, ${percent}% 100%, ${percent}% 0, 0% 0)`
+    }
+  }
 </script>
 
+
 <div class="landing" transition:fly={{ y: 200, duration: 1000 }}>
-  <div class="slider"></div>
   <h1>See the <span class="gradient">world</span> speak.</h1>
 
   <h2>
@@ -79,8 +95,15 @@
   </h2>
 
   <div class="images">
-    <img class="primary" src={UnlabeledHand} id="hand2" alt="Hand doing the ASL pose for 'R'."/>
-    <img class="overlay" src={LabeledHand} id="hand" alt="Hand doing the ASL pose for 'R'." />
+    <div class="images-container" on:mousemove|self={e => cursorX = e.offsetX}>
+      <img bind:this={primaryHand} class="primary" src={UnlabeledHand} id="hand2" alt="Hand doing the ASL pose for 'R'."/>
+      <img bind:this={overlayHand} class="overlay" src={LabeledHand} id="hand" alt="Hand doing the ASL pose for 'R'." />
+      <div class="slider" bind:this={slider}>
+        <p>hover<br/>
+          over<br/>
+          me!</p>
+      </div>
+    </div>
   </div>
 
   <div class="container">
@@ -113,7 +136,15 @@
   }
 
   .images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .images-container {
     position: relative;
+    height: 100%;
+    margin: 0 auto;
   }
 
   .images .overlay {
@@ -123,21 +154,26 @@
     transform: translateX(-50%);
   }
 
-  .overlay {
-    clip-path: polygon(0% 100%, 00% 100%, 0% 0, 0% 0);
+  .primary, .overlay, .slider {
+    /* stops offsetX being transferred to the child elements */
+    pointer-events: none;
   }
-/*   
-  @keyframes clip {
-    0% {
-      clip-path: polygon(0% 100%, 00% 100%, 0% 0, 0% 0);
-    }
-    50% {
-      clip-path: polygon(0% 100%, 100% 100%, 100% 0, 0% 0);
-    }
-    100% {
-      clip-path: polygon(0% 100%, 00% 100%, 0% 0, 0% 0);
-    }
-  } */
+
+  .overlay {
+    clip-path: polygon(0% 100%, 0% 100%, 0% 0, 0% 0);
+  }
+  
+  .slider {
+    position: absolute;
+    top: 0;
+    width: 0.2rem;
+    height: 80%;
+    background-color: #8027E0;
+  }
+  
+  .slider p {
+    transform: rotate(9deg) translate(1rem, -1rem);
+  }
 
   img {
     display: block;
