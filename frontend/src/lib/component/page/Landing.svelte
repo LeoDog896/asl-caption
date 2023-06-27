@@ -7,6 +7,7 @@
   import type { Context } from 'svelte-simple-modal';
   import { process } from '$lib/model';
   import * as tf from '@tensorflow/tfjs';
+  import * as backend from "$lib/backend";
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
   import { onMount } from 'svelte';
   import { getContext } from 'svelte';
@@ -48,7 +49,7 @@
       reader.onload = () => {
         const img = new Image();
         img.onload = async () => {
-          const data = await process(model, img);
+          const data = await backend.process(img);
 
           open(ImageDisplay, {
             data

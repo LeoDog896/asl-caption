@@ -1,16 +1,10 @@
 <script lang="ts">
-  import FileUpload from '$lib/component/FileUpload.svelte';
-  import { process } from '$lib/model';
-  import * as backend from "$lib/backend";
-  import { IconCamera, IconFile, IconLoader } from '@tabler/icons-svelte';
   import * as tf from '@tensorflow/tfjs';
   import { loadGraphModel } from '@tensorflow/tfjs-converter';
   import { onMount } from 'svelte';
   import { getContext } from 'svelte';
   import type { Context } from 'svelte-simple-modal';
   const { open } = getContext<Context>('simple-modal');
-  import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
-  import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
   import type * as cjs from 'chart.js';
   import People from "$lib/component/page/People.svelte";
 
@@ -92,7 +86,6 @@
   import MODEL_URL from '../model/model.json?url';
   const shards = import.meta.glob('../model/*.bin', { as: 'url', eager: true });
 
-  let file: File | undefined;
   let model: tf.GraphModel<string | tf.io.IOHandler>;
   let loading = true;
 
@@ -111,33 +104,6 @@
     );
     loading = false;
   });
-
-  $: if (file) {
-    if (model) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const img = new Image();
-        console.log(img);
-        img.onload = async () => {
-          const data = await backend.process(img);
-
-          open(ImageDisplay, {
-            data
-          });
-        };
-
-        img.src = reader.result as string;
-      };
-
-      reader.readAsDataURL(file);
-    }
-  }
-
-  function openVideo() {
-    open(VideoDisplay, {
-      model
-    });
-  }
 </script>
 
 <svelte:head>
