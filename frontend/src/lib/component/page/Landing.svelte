@@ -183,7 +183,7 @@
     position: absolute;
     top: 0;
     width: 0.2rem;
-    height: 80%;
+    height: 72.6%;
     background-color: #8027e0;
   }
 
