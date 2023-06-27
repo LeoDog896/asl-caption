@@ -77,7 +77,6 @@
 
   $: {
     if (slider) {
-      console.log(cursorX)
       slider.style.left = `${cursorX}px`;
 
       const percent = slider.offsetLeft / primaryHand.offsetWidth * 100;
