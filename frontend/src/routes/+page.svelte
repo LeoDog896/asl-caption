@@ -299,6 +299,7 @@
   footer {
     text-align: center;
     padding: 1rem;
+    color: var(--background-text);
   }
 
   .gradient {
@@ -372,6 +373,7 @@
 
   .landing {
     padding: 2rem;
+    color: var(--background-text);
   }
 
   h1 {
@@ -414,6 +416,7 @@
   #upload {
     text-align: center;
     background-color: var(--primary);
+    color: var(--text);
   }
 
   .buttons {
