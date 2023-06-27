@@ -5,10 +5,8 @@
   import Modal from 'svelte-simple-modal';
 </script>
 
-
 <Modal>
   <Navigation />
 
   <slot />
 </Modal>
-

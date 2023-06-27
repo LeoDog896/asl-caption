@@ -32,9 +32,12 @@
       .then((stream) => {
         video.srcObject = stream;
         return video.play();
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.error(err);
-        alert('Unable to access webcam - check your permissions or make sure you aren\'t using it in another tab');
+        alert(
+          "Unable to access webcam - check your permissions or make sure you aren't using it in another tab"
+        );
         close();
       });
   });
@@ -50,7 +53,7 @@
 
 <ImageDisplay {data}>
   <!-- svelte-ignore a11y-media-has-caption this is a webcam -->
-  <video autoplay tabindex=-1 bind:this={video} />
+  <video autoplay tabindex="-1" bind:this={video} />
 </ImageDisplay>
 
 <style>

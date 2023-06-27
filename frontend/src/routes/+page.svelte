@@ -9,20 +9,42 @@
   const { open } = getContext('simple-modal');
   import ImageDisplay from '$lib/component/display/ImageDisplay.svelte';
   import VideoDisplay from '$lib/component/display/VideoDisplay.svelte';
+  import type * as cjs from 'chart.js';
 
   // Statistics
-  import { Line } from 'svelte-chartjs'
+  import { Line } from 'svelte-chartjs';
   import 'chart.js/auto';
-  import results from "../stats/results.csv"
-  const parsedResults = results.map(result => 
+  import results from '../stats/results.csv';
+  const parsedResults = results.map((result) =>
     Object.fromEntries(Object.entries(result).map(([key, value]) => [key.trim(), value.trim()]))
   );
 
-  const labels = parsedResults.map(result => result.epoch);
+  const labels = parsedResults.map((result) => result.epoch);
 
-  const rawData = parsedResults.reduce((acc, result) => {
+  const dataFilters = [
+    "epoch",
+    "lr/"
+  ]
+
+  interface Category {
+    name: string;
+    labels: string[];
+  }
+
+  const categories: Category[] = [
+    {
+      name: "Loss",
+      labels: ["box_loss", "cls_loss", "dfl_loss"]
+    },
+    {
+      name: "Precision & Recall",
+      labels: ["precision", "recall", "mAP50", "mAP50-95"]
+    },
+  ]
+
+  const rawData = parsedResults.reduce((acc: Record<string, string[]>, result) => {
     Object.entries(result).forEach(([key, value]) => {
-      if (key !== "epoch") {
+      if (!dataFilters.some((filter) => key.includes(filter))) {
         if (!acc[key]) {
           acc[key] = [];
         }
@@ -30,69 +52,35 @@
       }
     });
     return acc;
-  }, {} as Record<string, string[]>);
+  }, {});
 
-  console.log(rawData)
-
-  const colors = [
-    "#5EB1BF",
-    "#D81E5B",
-    "#2E4057",
-    "#C6AC8F",
-    "#04724D",
-    "#F7FE72",
-    "#90F1EF",
-    "#FFD6E0",
-    "#D5A021",
-    "#30638E",
-    "#EDAE49",
-    "#5F4BB6"
-  ]
-
-  const defaultOptions = Object.freeze({
-    borderCapStyle: "butt",
+  const defaultOptions: Partial<cjs.ChartDataset<'line', number[]>> = {
+    borderCapStyle: 'butt',
     borderDash: [],
     borderDashOffset: 0.0,
-    borderJoinStyle: "miter",
-    pointBorderColor: "rgb(205, 130,1 58)",
-    pointBackgroundColor: "rgb(255, 255, 255)",
+    borderJoinStyle: 'miter',
     pointBorderWidth: 10,
     pointHoverRadius: 5,
-    pointHoverBackgroundColor: "rgb(0, 0, 0)",
-    pointHoverBorderColor: "rgba(220, 220, 220,1)",
     pointHoverBorderWidth: 2,
     pointRadius: 0,
     pointHitRadius: 10,
-  })
-
-  let data: import("chart.js").ChartData<"line", (number | import("chart.js").Point)[], unknown> = {
-    labels,
-    datasets: [
-      // {
-      //   label: "My First dataset",
-      //   borderColor: "rgb(205, 130, 158)",
-      //   ...defaultOptions,
-      //   data: [65, 59, 80, 81, 56, 55, 40]
-      // },
-      // {
-      //   label: "My Second dataset",
-      //   borderColor: "rgb(35, 26, 136)",
-      //   ...defaultOptions,
-      //   data: [28, 48, 40, 19, 86, 27, 90]
-      // }
-      ...Object.entries(rawData).map(([key, values], index) => ({
-        label: key,
-        borderColor: colors[index],
-        ...defaultOptions,
-        data: values.map(value => parseFloat(value))
-      }))
-    ],
+    tension: 0.5
   };
-  
+
+  const datasets = Object.entries(rawData).map(([key, values]) => ({
+    label: key,
+    ...defaultOptions,
+    data: values.map((value) => parseFloat(value))
+  }))
+
+  let data: cjs.ChartData<'line', number[], unknown> = {
+    labels,
+    datasets,
+  };
 
   // Team photos
-  import Hazel from '../images/selfies/hazel.png'
-  import Temp from '../images/selfies/temp.jpg'
+  import Hazel from '../images/selfies/hazel.png';
+  import Temp from '../images/selfies/temp.jpg';
 
   // Model files
   import MODEL_URL from '../model/model.json?url';
@@ -153,7 +141,10 @@
   <div class="landing">
     <h1>See the <span class="gradient">world</span> speak.</h1>
 
-    <h2>We translate <a href="https://www.nidcd.nih.gov/health/american-sign-language">ASL</a> to English in all media.</h2>
+    <h2>
+      We translate <a href="https://www.nidcd.nih.gov/health/american-sign-language">ASL</a> to English
+      in all media.
+    </h2>
 
     <img src="landing.png" alt="Hand doing the ASL pose for 'R'." />
 
@@ -180,22 +171,22 @@
     <h2 id="about">About Us</h2>
 
     <p>
-      We're a group of students who are <b>passionate</b> about promoting inclusive communication for all.
-      We firmly believe that <b>communication</b> is a fundamental human right and no one should be left
-      behind due to barriers caused by hearing differences.
+      We're a group of students who are <b>passionate</b> about promoting inclusive communication
+      for all. We firmly believe that <b>communication</b> is a fundamental human right and no one should
+      be left behind due to barriers caused by hearing differences.
     </p>
 
     <p>
-      Our mission is to create a world where everyone can <b>effectively</b> and <b>effortlessly</b> communicate,
-      regardless of their hearing abilities. By recognizing the importance of American Sign Language
-      and its role in facilitating communication for the deaf community, we have taken the first
+      Our mission is to create a world where everyone can <b>effectively</b> and <b>effortlessly</b>
+      communicate, regardless of their hearing abilities. By recognizing the importance of American Sign
+      Language and its role in facilitating communication for the deaf community, we have taken our first
       step towards making the world a more accessible place.
     </p>
 
     <h3 style="font-size: 35px">Our Team</h3>
 
     <div id="people">
-      <img src={Hazel} alt="Hazel"/>
+      <img src={Hazel} alt="Hazel" />
       <img src={Temp} alt="Temp" />
       <img src={Temp} alt="Temp" />
       <img src={Temp} alt="Temp" />
@@ -208,20 +199,57 @@
       <h2>Evaluation</h2>
 
       <div id="evaluationGrid">
-        <!-- {#each graphs as graph}
-          <div class="graph">
-            <div class="display">
-              <img src={graph.source} alt={graph.alt} />
-              TODO: -->
-              <!-- svelte-ignore a11y-no-noninteractive-tabindex
-              <div class="description" tabindex="0">
-                <p>{graph.description}</p>
-              </div>
-            </div>
-            <p>{graph.title}</p>
-          </div>
-        {/each} -->
-        <Line {data} options={{ responsive: true }}></Line>
+        <Line 
+          {data}
+          options={{ 
+            responsive: true,
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Epoch',
+                  color: 'white'
+                },
+                ticks: {
+                  color: 'white'
+                },
+                grid: {
+                  color: 'rgba(224, 224, 224, 0.2)'
+                }
+              },
+              y: {
+                ticks: {
+                  color: 'white',
+                  major: {
+                    enabled: true
+                  }
+                },
+                grid: {
+                  color: 'rgba(224, 224, 224, 0.2)'
+                }
+              },
+            },
+            color: 'white',
+            font: {
+              family: "'Inter Variable', sans-serif",
+              weight: "900"
+            }
+          }}
+        />
+
+        {#each categories as category}
+          <button class="categorySwitch" on:click={() => {
+            for (const datasetName of category.labels) {
+              const dataset = datasets.find(dataset => dataset.label === datasetName);
+
+              if (dataset) {
+                dataset.hidden = !dataset.hidden;
+              }
+            }
+
+            data = data
+          }}>{category.name}</button>
+        {/each}
       </div>
     </div>
   </div>
@@ -234,6 +262,20 @@
 <style>
   :root {
     --max-width: 1500px;
+  }
+
+  .categorySwitch {
+    font-weight: 800;
+    padding: 0.5rem;
+    color: white;
+    border: 2px solid var(--secondary-hover);
+    margin: 1rem;
+    background-color: var(--secondary);
+    transition: background-color 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  .categorySwitch:hover {
+    background-color: var(--primary);
   }
 
   .small-call {
@@ -276,10 +318,6 @@
   }
 
   #evaluationGrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: 1rem;
     max-width: 1500px;
     margin: 0 auto;
   }
@@ -356,7 +394,7 @@
   h2 {
     font-size: 2.7rem;
     text-align: center;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.2;
   }
 
