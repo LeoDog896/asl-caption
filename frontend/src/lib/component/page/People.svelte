@@ -40,7 +40,8 @@
     },
     {
       name: 'Stephen',
-      description: `Stephen's intro`,
+      description: `I am in the class of 2024 in John H. Glenn High School on Long Island. I enjoy developing games with C++, content creation,
+      and keeping up with current news and politics. I hope to dual major in computer software and hardware development.`,
       src: Stephen
     },
     {
