@@ -274,6 +274,7 @@
   .landing {
     padding: 2rem;
     color: var(--background-text);
+    overflow-x: hidden;
   }
 
   h1 {
