@@ -66,6 +66,6 @@
 
 <style>
   canvas {
-    border: 1px solid black;
+    max-width: calc(max(80vw, 60rem));
   }
 </style>

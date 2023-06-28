@@ -1,6 +1,8 @@
 <script lang="ts">
   import type * as cjs from 'chart.js';
   import People from '$lib/component/page/People.svelte';
+  import CloseButton from '$lib/component/display/CloseButton.svelte';
+  import { Modal } from 'svelte-simple-modal';
 
   // Statistics
   import { Line } from 'svelte-chartjs';
@@ -78,7 +80,16 @@
 </svelte:head>
 
 <main>
-  <Landing />
+  <Modal
+    unstyled={true}
+    classBg="modalBg"
+    classWindowWrap="modalWrapper"
+    classWindow="modalWindow"
+    classContent="modalContent"
+    closeButton={CloseButton}
+  >
+    <Landing />
+  </Modal>
   <div class="slant">
     <h2 id="about">About Us</h2>
 
@@ -291,5 +302,41 @@
     text-align: center;
     font-weight: 800;
     line-height: 1.2;
+  }
+
+  /* custom modal styles */
+  :global(.modalBg) {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #0002;
+    backdrop-filter: blur(0.2em);
+  }
+
+  :global(.modalWrapper) {
+    display: contents;
+  }
+
+  :global(.modalWindow) {
+    max-width: 100vw;
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    background-color: var(--background);
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+
+  :global(.modalContent) {
+    margin: 1rem;
+    overflow-x: auto;
   }
 </style>

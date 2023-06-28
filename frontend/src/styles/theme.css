@@ -25,6 +25,7 @@
 
   --text: white;
   --background: var(--dark-background);
+  --background-text: var(--text);
   --surface: var(--black-1);
 
   /* common styles */
@@ -39,7 +40,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background-text: black;
+    --background-text: #242424;
     --background: var(--light-background);
 
     --shadow-color: #4444;
