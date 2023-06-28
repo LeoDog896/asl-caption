@@ -1,10 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
 
-from werkzeug import exceptions
-from werkzeug.utils import secure_filename
-
-from gradio_client import Client
+#from gradio_client import Client
+import requests
+import json
 
 
 # config
@@ -23,7 +22,7 @@ CORS(app, resources={
 
 # gradio client setup
 
-client = Client('https://diego7167-asl-caption.hf.space/', serialize=False)
+PREDICT_URL = 'https://diego7167-asl-caption.hf.space/api/predict'
 
 # api routes
 
@@ -37,8 +36,11 @@ def api_upload():
     if request.json['url']:
         header, data = request.json['url'].split('base64,', 1)
 
-        response = client.submit(data, api_name='/predict')
+        r = requests.post(PREDICT_URL, json={ "data": [data] })
+        print(r.text)
         
-        return jsonify(response.result())
+        return Response(json.dumps(r.json()['data'][0]), headers={
+            "Content-Type": "application/json"
+        })
     else:
         return 'not ok!'
