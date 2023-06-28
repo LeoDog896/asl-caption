@@ -78,6 +78,12 @@
     height: 25rem;
   }
 
+  @media (max-width: 600px) {
+    img {
+      height: 15rem;
+    }
+  }
+
   .person {
     position: relative;
     overflow: hidden;

@@ -14,6 +14,8 @@
   import Stars from './Stars.svelte';
   const { open } = getContext<Context>('simple-modal');
 
+  const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
+
   // Hand images
   import LabeledHand from '../../../images/hands/landing.png';
   import UnlabeledHand from '../../../images/hands/landing-unlabeled.png';
@@ -71,6 +73,7 @@
   }
 
   let slider: HTMLDivElement;
+  let container: HTMLDivElement;
   let primaryHand: HTMLImageElement;
   let overlayHand: HTMLImageElement;
   let cursorX = spring(0);
@@ -98,7 +101,12 @@
   </h2>
 
   <div class="images">
-    <div class="images-container" on:mousemove|self={(e) => ($cursorX = e.offsetX)}>
+    <div 
+      class="images-container"
+      bind:this={container}
+      on:mousemove|self={(e) => $cursorX = e.offsetX}
+      on:touchmove|self={(e) => $cursorX = clamp(e.touches[0].clientX - container.offsetLeft, 0, container.offsetWidth)}
+    >
       <img
         bind:this={primaryHand}
         class="primary"
@@ -194,6 +202,9 @@
 
   .slider p {
     transform: rotate(9deg) translate(1rem, -1rem);
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   img {
@@ -274,12 +285,7 @@
   @media (max-width: 600px) {
     h1 {
       font-size: 4rem;
-    }
-  }
-
-  @media (max-width: 400px) {
-    h1 {
-      font-size: 3rem;
+      margin-top: 6rem;
     }
   }
 

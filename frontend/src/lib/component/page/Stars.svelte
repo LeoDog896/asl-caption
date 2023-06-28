@@ -12,7 +12,7 @@
   const points: Point[] = Array.from({ length: 100 }, () => [
     random(0, 1),
     random(-1, 1),
-    random(0, 1),
+    random(0, 1)
   ]);
 
   let render: Render;
