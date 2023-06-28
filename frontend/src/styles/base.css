@@ -13,8 +13,8 @@
 }
 
 @supports (font-variation-settings: normal) {
+  /* enable variable fonts if available */
   :root {
-    /* enable variable fonts if available */
     font-family: 'Inter Variable', sans-serif;
   }
 }

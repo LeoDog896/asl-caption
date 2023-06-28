@@ -1,14 +1,17 @@
 <script lang="ts">
   import { type LabelledData, names } from '$lib/model';
+  import { Canvas, Layer, type Render } from 'svelte-canvas';
 
   export let data: LabelledData;
-  let canvas: HTMLCanvasElement;
+  let canvasWidth: number;
+  let canvasHeight: number;
 
-  $: if (data && canvas) {
-    const ctx = canvas.getContext('2d')!;
+  let render: Render
+  $: render = ({ context, width, height }) => {
+    if (!data) return;
 
     // clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, width, height);
 
     const {
       img,
@@ -19,11 +22,11 @@
     } = data;
 
     // resize canvas to match image
-    canvas.width = img instanceof HTMLVideoElement ? img.videoWidth : img.width;
-    canvas.height = img instanceof HTMLVideoElement ? img.videoHeight : img.height;
+    canvasWidth = img instanceof HTMLVideoElement ? img.videoWidth : img.width;
+    canvasHeight = img instanceof HTMLVideoElement ? img.videoHeight : img.height;
 
     // draw image
-    ctx.drawImage(img, 0, 0);
+    context.drawImage(img, 0, 0);
 
     // loop over chunks of 4 through boxes_data
     for (let i = 0; i < boxesData.length; i += 4) {
@@ -37,35 +40,36 @@
       const scoreData = (scoresData[i / 4] * 100).toFixed(2);
 
       // draw the outline box
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
-      ctx.strokeRect(x * xRatio, y * yRatio, (x1 - x) * xRatio, (y1 - y) * yRatio);
+      context.strokeStyle = color;
+      context.lineWidth = 2;
+      context.strokeRect(x * xRatio, y * yRatio, (x1 - x) * xRatio, (y1 - y) * yRatio);
 
       // draw a slightly transparent box
-      ctx.fillStyle = color;
-      ctx.globalAlpha = 0.2;
-      ctx.fillRect(x * xRatio, y * yRatio, (x1 - x) * xRatio, (y1 - y) * yRatio);
-      ctx.globalAlpha = 1;
+      context.fillStyle = color;
+      context.globalAlpha = 0.2;
+      context.fillRect(x * xRatio, y * yRatio, (x1 - x) * xRatio, (y1 - y) * yRatio);
+      context.globalAlpha = 1;
 
       // draw a box around the class name
-      ctx.font = '20px Arial';
+      context.font = '20px Arial';
       const text = `${name} @ ${scoreData}%`;
-      const textWidth = ctx.measureText(text).width;
-      ctx.fillStyle = color;
-      ctx.fillRect(x * xRatio, y * yRatio - 20, textWidth, 20);
+      const textWidth = context.measureText(text).width;
+      context.fillStyle = color;
+      context.fillRect(x * xRatio, y * yRatio - 20, textWidth, 20);
 
       // draw the class name
-      ctx.fillStyle = 'white';
-      ctx.fillText(text, x * xRatio, y * yRatio - 5);
+      context.fillStyle = 'white';
+      context.fillText(text, x * xRatio, y * yRatio - 5);
     }
   }
 </script>
 
 <slot />
-<canvas bind:this={canvas} />
-
+<Canvas bind:width={canvasWidth} bind:height={canvasHeight} class="image-canvas">
+  <Layer {render} />
+</Canvas>
 <style>
-  canvas {
+  :global(.image-canvas) {
     max-width: calc(max(80vw, 60rem));
   }
 </style>

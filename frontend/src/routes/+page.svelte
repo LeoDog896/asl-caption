@@ -218,12 +218,12 @@
   }
 
   p {
-    max-width: 1500px;
+    max-width: var(--max-width);
     margin: 2rem auto;
   }
 
   #evaluationGrid {
-    max-width: 1500px;
+    max-width: var(--max-width);
     margin: 0 auto;
   }
 

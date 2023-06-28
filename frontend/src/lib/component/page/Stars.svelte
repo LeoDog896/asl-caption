@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Canvas, Layer, type Render } from 'svelte-canvas';
-  import { tweened } from 'svelte/motion';
 
   let innerWidth: number;
   let innerHeight: number;
@@ -9,9 +8,12 @@
   const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
   type Point = [x: number, y: number, z: number];
+
   const points: Point[] = Array.from({ length: 100 }, () => [
     random(0, 1),
+    // We move the y start back -1 to add extra stars above the screen when the user eventually scrolls down
     random(-1, 1),
+    // and include Z for a parallax effect
     random(0, 1)
   ]);
 

@@ -18,7 +18,6 @@
   --primary: #995fa3;
   --secondary: #00b3b3;
   --secondary-hover: #009999;
-  --test-color: var(--secondary);
   --text-bold: #ffadff;
 
   /* default dark colorscheme */
@@ -27,23 +26,4 @@
   --background: var(--dark-background);
   --background-text: var(--text);
   --surface: var(--black-1);
-
-  /* common styles */
-
-  --shadow-color: #8882;
-  --shadow-size: 60px;
-  --shadow-rim-size: 8px;
-  --shadow-rim-color: #bbb2;
-  --shadow: 0 0 var(--shadow-size) calc(var(--shadow-size) * -0.2) var(--shadow-color),
-    0 0 var(--shadow-rim-size) var(--shadow-rim-color);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background-text: #242424;
-    --background: var(--light-background);
-
-    --shadow-color: #4444;
-    --shadow: 0 0 var(--shadow-size) calc(var(--shadow-size) * -0.2) var(--shadow-color);
-  }
 }

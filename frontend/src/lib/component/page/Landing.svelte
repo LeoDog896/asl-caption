@@ -101,11 +101,12 @@
   </h2>
 
   <div class="images">
-    <div 
+    <div
       class="images-container"
       bind:this={container}
-      on:mousemove|self={(e) => $cursorX = e.offsetX}
-      on:touchmove|self={(e) => $cursorX = clamp(e.touches[0].clientX - container.offsetLeft, 0, container.offsetWidth)}
+      on:mousemove|self={(e) => ($cursorX = e.offsetX)}
+      on:touchmove|self={(e) =>
+        ($cursorX = clamp(e.touches[0].clientX - container.offsetLeft, 0, container.offsetWidth))}
     >
       <img
         bind:this={primaryHand}

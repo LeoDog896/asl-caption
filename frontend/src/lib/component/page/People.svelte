@@ -1,11 +1,11 @@
 <script lang="ts">
   // Team photos TODO: there has to be a better way to import these
-  import Hazel from '../../../images/selfies/hazel.png';
-  import Allen from '../../../images/selfies/allen.jpg';
-  import Tristan from '../../../images/selfies/tristan.jpg';
-  import Meredith from '../../../images/selfies/meredith.jpg';
-  import Stephen from '../../../images/selfies/stephen.jpg';
-  import Diego from '../../../images/selfies/diego.jpg';
+  import Hazel from '../../../images/selfies/hazel.webp';
+  import Allen from '../../../images/selfies/allen.webp';
+  import Tristan from '../../../images/selfies/tristan.webp';
+  import Meredith from '../../../images/selfies/meredith.webp';
+  import Stephen from '../../../images/selfies/stephen.webp';
+  import Diego from '../../../images/selfies/diego.webp';
 
   interface Person {
     name: string;
@@ -40,7 +40,7 @@
     },
     {
       name: 'Stephen',
-      description: `I am in the class of 2024 in John H. Glenn High School on Long Island. I enjoy developing games with C++, content creation,
+      description: `Hello, my name is Stephen Wasylenko. I am in the class of 2024 in John H. Glenn High School on Long Island. I enjoy developing games with C++, content creation,
       and keeping up with current news and politics. I hope to dual major in computer software and hardware development.`,
       src: Stephen
     },

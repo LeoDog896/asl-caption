@@ -1,4 +1,5 @@
 <script lang="ts">
+  // storing this allows us to do the fancy border transition on scroll down
   let scrollY = 0;
 </script>
 
@@ -33,7 +34,6 @@
 
   .wrapper {
     display: flex;
-    /* narrow screen layout */
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
