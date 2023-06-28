@@ -89,7 +89,7 @@
 </script>
 
 <div class="landing" transition:fly={{ y: 200, duration: 1000 }}>
-  <Stars></Stars>
+  <Stars />
   <h1>See the <span class="gradient">world</span> speak.</h1>
 
   <h2>
@@ -146,15 +146,6 @@
 </div>
 
 <style>
-  :global(.canvas) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  
   .buttons .button:disabled {
     opacity: 0.5;
   }

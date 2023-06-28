@@ -4,7 +4,7 @@
   import Allen from '../../../images/selfies/allen.jpg';
   import Tristan from '../../../images/selfies/tristan.jpg';
   import Meredith from '../../../images/selfies/meredith.jpg';
-  import Stephen from '../../../images/selfies/stephen.jpg'
+  import Stephen from '../../../images/selfies/stephen.jpg';
   import Temp from '../../../images/selfies/temp.jpg';
 
   interface Person {

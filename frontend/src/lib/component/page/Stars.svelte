@@ -1,22 +1,29 @@
 <script lang="ts">
   import { Canvas, Layer, type Render } from 'svelte-canvas';
+  import { tweened } from 'svelte/motion';
 
   let innerWidth: number;
   let innerHeight: number;
   let scrollY: number;
 
+  const random = (min: number, max: number) => Math.random() * (max - min) + min;
+
   type Point = [x: number, y: number, z: number];
-  const points: Point[] = Array.from({ length: 100 }, () => [Math.random(), Math.random(), Math.random()]);
+  const points: Point[] = Array.from({ length: 100 }, () => [
+    random(0, 1),
+    random(-1, 1),
+    random(0, 1),
+  ]);
 
   let render: Render;
   $: render = ({ context, width, height }) => {
     for (const [x, y, z] of points) {
       context.fillStyle = `rgba(255, 255, 255, ${z})`;
       context.beginPath();
-      context.arc(x * width, (y * height) + (scrollY / (1 / z)), 2, 0, 2 * Math.PI);
+      context.arc(x * width, y * height + (scrollY * z) / 4, 2, 0, 2 * Math.PI);
       context.fill();
     }
-  }
+  };
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight bind:scrollY />
@@ -24,3 +31,14 @@
 <Canvas width={innerWidth} height={innerHeight} class="canvas">
   <Layer {render} />
 </Canvas>
+
+<style>
+  :global(.canvas) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>

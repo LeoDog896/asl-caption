@@ -104,9 +104,7 @@
           href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project">our ASL dataset</a
         > for 100 epochs with a pretrained yolov8n base model.
       </h3>
-      <p>
-        (You can filter between loss or accuracy by clicking on the category buttons.)
-      </p>
+      <p>(You can filter between loss or accuracy by clicking on the category buttons.)</p>
 
       <div id="evaluationGrid">
         <div class="graphContainer">
