@@ -3,7 +3,7 @@
 
   let innerWidth: number;
   let innerHeight: number;
-  let scrollY: number;
+  let scrollY = 0;
 
   const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
