@@ -5,8 +5,5 @@ dependencies = [
   "flask",
   "flask-cors",
 
-  "torch",
-  "torchvision",
-
-  "gradio_client"
+  "requests"
 ]
