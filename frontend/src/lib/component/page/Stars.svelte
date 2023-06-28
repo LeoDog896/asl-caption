@@ -28,7 +28,7 @@
   };
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight bind:scrollY />
+<svelte:window bind:innerWidth bind:innerHeight on:scroll={() => scrollY = window.scrollY} />
 
 <Canvas width={innerWidth} height={innerHeight} class="canvas">
   <Layer {render} />

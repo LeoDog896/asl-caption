@@ -3,7 +3,7 @@
   let scrollY = 0;
 </script>
 
-<svelte:window bind:scrollY />
+<svelte:window on:scroll={() => scrollY = window.scrollY} />
 
 <nav class={scrollY === 0 ? 'top' : ''}>
   <div class="wrapper">
