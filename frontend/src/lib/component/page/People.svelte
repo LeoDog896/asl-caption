@@ -16,7 +16,8 @@
   const people: Person[] = [
     {
       name: 'Hazel',
-      description: `Hazel's intro`,
+      description: `Hi I'm Hazel, full name Haizhen Zhou. I am studying computer science in WA while also doing competitive swimming in my free time.
+      I got interested in ML and wanted to learn more! `,
       src: Hazel
     },
     {
