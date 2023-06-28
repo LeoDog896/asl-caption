@@ -138,7 +138,7 @@
                   }
                 }
               },
-              color: 'white'
+              color: 'white',
             }}
           />
           {#if categories.every((category) => !category.checked)}
@@ -229,6 +229,10 @@
 
   .graphContainer {
     position: relative;
+    margin: 0 auto;
+    max-width: 1500px;
+    display: flex;
+    justify-content: center;
   }
 
   .graphOverlay {
