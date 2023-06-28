@@ -46,7 +46,9 @@
     },
     {
       name: 'Diego',
-      description: `Diego's intro`,
+      description: `I'm going to be a junior at Early College High School in Costa Mesa, CA.
+      My current goal is to major in Computer Science, Software Engineering, or some other more specific field.
+      I spend most of my free time learning and practicing software development, and I prefer to use Rust, Kotlin, or TypeScript in my projects depending on the platform (native, JVM, and web, respectively).`,
       src: Diego
     }
   ];
@@ -103,6 +105,13 @@
     align-items: center;
     padding: 1rem;
     transition: bottom 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  @media (max-width: 600px) {
+    .description {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
   }
 
   .person:hover .description {
