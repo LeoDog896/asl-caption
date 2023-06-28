@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@fontsource-variable/inter": "^5.0.3",
+    "@fontsource-variable/outfit": "^5.0.3",
     "@modyfi/vite-plugin-yaml": "^1.0.4",
     "@playwright/test": "^1.28.1",
     "@rollup/plugin-dsv": "^3.0.2",

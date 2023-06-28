@@ -8,6 +8,9 @@ devDependencies:
   '@fontsource-variable/inter':
     specifier: ^5.0.3
     version: 5.0.3
+  '@fontsource-variable/outfit':
+    specifier: ^5.0.3
+    version: 5.0.3
   '@modyfi/vite-plugin-yaml':
     specifier: ^1.0.4
     version: 1.0.4(vite@4.3.9)
@@ -332,6 +335,10 @@ packages:
 
   /@fontsource-variable/inter@5.0.3:
     resolution: {integrity: sha512-AIE1Lm2/cNkCD4oAJ3JVY54tGhlUS7NnAiqGmE045v+7XHqmUhSYjhQNUgnBGcenth4bN75l+KIeTDbcGc7Emw==}
+    dev: true
+
+  /@fontsource-variable/outfit@5.0.3:
+    resolution: {integrity: sha512-MhU6+2REjA+OAF6Gd0l+fZ1EH/2tmpEi52vXOq68xcyyFgrVzY7cEv7NlggnHG8DgZI47yDGoByjxSKeLH046g==}
     dev: true
 
   /@humanwhocodes/config-array@0.11.10:

@@ -71,9 +71,6 @@
     labels,
     datasets
   };
-  // Model files
-  import MODEL_URL from '../model/model.json?url';
-  const shards = import.meta.glob('../model/*.bin', { as: 'url', eager: true });
 </script>
 
 <svelte:head>
@@ -106,14 +103,14 @@
     <div class="slant slant-secondary">
       <h2>Evaluation</h2>
 
-      <p>
+      <h3>
         We ran our model on <a
           style="color: var(--text-bold)"
           href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project">our ASL dataset</a
-        > for 100 epochs. Here are the results.
-      </p>
+        > for 100 epochs with a pretrained yolov8n base model.
+      </h3>
       <p>
-        <sub>(You can filter between loss or accuracy by clicking on the category buttons.)</sub>
+        (You can filter between loss or accuracy by clicking on the category buttons.)
       </p>
 
       <div id="evaluationGrid">

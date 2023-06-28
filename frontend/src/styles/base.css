@@ -43,6 +43,12 @@ h2 {
   font-weight: 500;
 }
 
+h1 {
+  font-weight: 900;
+  font-family: 'Outfit Variable', sans-serif;
+  text-transform: uppercase;
+}
+
 /* document */
 
 body {

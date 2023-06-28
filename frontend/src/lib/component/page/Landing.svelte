@@ -82,12 +82,7 @@
 
       const percent = (slider.offsetLeft / primaryHand.offsetWidth) * 100;
 
-      if (percent > 60) {
-        tooltipEnabled = false;
-      } else {
-        tooltipEnabled = true;
-      }
-
+      tooltipEnabled = percent < 60;
       overlayHand.style.clipPath = `polygon(0% 100%, ${percent}% 100%, ${percent}% 0, 0% 0)`;
     }
   }
