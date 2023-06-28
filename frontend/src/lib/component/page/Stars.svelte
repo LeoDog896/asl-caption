@@ -9,7 +9,7 @@
 
   type Point = [x: number, y: number, z: number];
 
-  const points: Point[] = Array.from({ length: 100 }, () => [
+  const points: Point[] = Array.from({ length: 200 }, () => [
     random(0, 1),
     // We move the y start back -1 to add extra stars above the screen when the user eventually scrolls down
     random(-1, 1),
@@ -22,13 +22,17 @@
     for (const [x, y, z] of points) {
       context.fillStyle = `rgba(255, 255, 255, ${z})`;
       context.beginPath();
-      context.arc(x * width, y * height + (scrollY * z) / 4, 2, 0, 2 * Math.PI);
+      context.arc(x * width, y * height - (2 * scrollY * z) / 3, 2, 0, 2 * Math.PI);
       context.fill();
     }
   };
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight on:scroll={() => scrollY = window.scrollY} />
+<svelte:window 
+  bind:innerWidth
+  bind:innerHeight
+  on:scroll={() => scrollY = window.scrollY}
+/>
 
 <Canvas width={innerWidth} height={innerHeight} class="canvas">
   <Layer {render} />
