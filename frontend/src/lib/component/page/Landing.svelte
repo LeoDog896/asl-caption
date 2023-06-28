@@ -216,6 +216,7 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
+    flex-wrap: wrap;
     background-color: var(--secondary);
   }
 
@@ -249,6 +250,12 @@
     width: 14rem;
 
     font-weight: 400;
+  }
+
+  @media (max-width: 575px) {
+    .buttons .button {
+      width: 100%;
+    }
   }
 
   .landing {
