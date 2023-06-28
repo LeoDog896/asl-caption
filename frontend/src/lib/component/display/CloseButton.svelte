@@ -10,8 +10,8 @@
   button {
     all: unset;
     position: absolute;
-    top: 0.75em;
-    right: 0.75em;
+    top: 0.5rem;
+    right: 0.5rem;
 
     color: var(--background-text);
     cursor: pointer;
