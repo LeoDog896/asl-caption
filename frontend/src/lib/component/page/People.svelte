@@ -5,7 +5,7 @@
   import Tristan from '../../../images/selfies/tristan.jpg';
   import Meredith from '../../../images/selfies/meredith.jpg';
   import Stephen from '../../../images/selfies/stephen.jpg';
-  import Temp from '../../../images/selfies/temp.jpg';
+  import Diego from '../../../images/selfies/diego.jpg';
 
   interface Person {
     name: string;
@@ -44,9 +44,9 @@
       src: Stephen
     },
     {
-      name: 'Temp',
-      description: 'Temporary',
-      src: Temp
+      name: 'Diego',
+      description: `Diego's intro`,
+      src: Diego
     }
   ];
 </script>
