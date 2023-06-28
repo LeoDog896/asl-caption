@@ -57,6 +57,8 @@ jobs:
         run: pnpm install
       - name: Build page
         run: pnpm run build
+        env: 
+          VITE_BACKEND_URL: "https://asl-proxy-server-2.diegosesmas1.repl.co/api"
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
