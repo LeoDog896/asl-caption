@@ -49,13 +49,8 @@
   }, {});
 
   const defaultOptions: Partial<cjs.ChartDataset<'line', number[]>> = {
-    borderCapStyle: 'butt',
     borderDash: [],
     borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderWidth: 10,
-    pointHoverRadius: 5,
-    pointHoverBorderWidth: 2,
     pointRadius: 0,
     pointHitRadius: 10,
     tension: 0.5
