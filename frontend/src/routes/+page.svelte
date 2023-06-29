@@ -79,8 +79,8 @@
 
     <p>
       We're a group of students who are <b>passionate</b> about promoting inclusive communication
-      for all. We firmly believe that <b>communication</b> is a fundamental human right and no one should
-      be left behind due to barriers caused by hearing differences.
+      for all. We firmly believe that <b>communication</b> is a fundamental human right, and helping
+      people to communicate is our way of giving back to the community.
     </p>
 
     <p>
