@@ -20,6 +20,7 @@
   import LabeledHand from '../../../images/hands/landing.png';
   import UnlabeledHand from '../../../images/hands/landing-unlabeled.png';
 
+  let mounted = false;
   let loading = true;
 
   // Model files
@@ -30,6 +31,7 @@
   let model: tf.GraphModel<string | tf.io.IOHandler>;
 
   onMount(async () => {
+    mounted = true;
     model = await loadGraphModel(
       tf.io.http(MODEL_URL, {
         fetchFunc: (url: string, init: Parameters<typeof fetch>[1]) => {
@@ -80,10 +82,10 @@
   let tooltipEnabled = true;
 
   $: {
-    if (slider) {
+    if (slider && mounted) {
       slider.style.left = `${$cursorX}px`;
 
-      const percent = (slider.offsetLeft / primaryHand.offsetWidth) * 100;
+      const percent = (slider.offsetLeft / (primaryHand.offsetWidth || 300)) * 100;
 
       tooltipEnabled = percent < 60;
       overlayHand.style.clipPath = `polygon(0% 100%, ${percent}% 100%, ${percent}% 0, 0% 0)`;
