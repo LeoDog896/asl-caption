@@ -138,7 +138,7 @@
                   }
                 }
               },
-              color: 'white',
+              color: 'white'
             }}
           />
           {#if categories.every((category) => !category.checked)}
