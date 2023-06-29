@@ -6,7 +6,7 @@
   let canvasWidth: number;
   let canvasHeight: number;
 
-  let render: Render
+  let render: Render;
   $: render = ({ context, width, height }) => {
     if (!data) return;
 
@@ -50,24 +50,29 @@
       context.fillRect(x * xRatio, y * yRatio, (x1 - x) * xRatio, (y1 - y) * yRatio);
       context.globalAlpha = 1;
 
+      // account for label exiting drawing area
+      let labelY = y * yRatio - 20;
+      if (labelY <= 0) labelY = y * yRatio;
+
       // draw a box around the class name
       context.font = '20px Arial';
       const text = `${name} @ ${scoreData}%`;
       const textWidth = context.measureText(text).width;
       context.fillStyle = color;
-      context.fillRect(x * xRatio, y * yRatio - 20, textWidth, 20);
+      context.fillRect(x * xRatio, labelY, textWidth + 2, 20);
 
       // draw the class name
       context.fillStyle = 'white';
-      context.fillText(text, x * xRatio, y * yRatio - 5);
+      context.fillText(text, x * xRatio + 1, labelY > 0 ? y * yRatio - 4 : y * yRatio + 15);
     }
-  }
+  };
 </script>
 
 <slot />
 <Canvas bind:width={canvasWidth} bind:height={canvasHeight} class="image-canvas">
   <Layer {render} />
 </Canvas>
+
 <style>
   :global(.image-canvas) {
     max-width: calc(max(80vw, 60rem));
