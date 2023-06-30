@@ -2,6 +2,9 @@
   import type * as cjs from 'chart.js';
   import People from '$lib/component/page/People.svelte';
 
+  // Hand image
+  import FromOnline from "../images/hands/from-online.png"
+
   // Statistics
   import { Line } from 'svelte-chartjs';
   import 'chart.js/auto';
@@ -77,20 +80,35 @@
   <div class="slant">
     <h2 id="about">About Us</h2>
 
-    <p>
-      We're a group of students who are <b>passionate</b> about promoting inclusive communication
-      for all. We firmly believe that <b>communication</b> is a fundamental human right, and helping
-      people to communicate is our way of giving back to the community.
-    </p>
+    <div class="about-container">
+      <div>
+        <p>
+          We're a group of students who are <b>passionate</b> about promoting inclusive communication
+          for all. We firmly believe that <b>communication</b> is a fundamental human right, and helping
+          people to communicate is our way of giving back to the community.
+        </p>
 
-    <p>
-      Our mission is to create a world where everyone can <b>effectively</b> and <b>effortlessly</b>
-      communicate, regardless of their hearing abilities. By recognizing the importance of American Sign
-      Language and its role in facilitating communication for the deaf community, we have taken our first
-      step towards making the world a more accessible place.
-    </p>
+        <p>
+          Our mission is to create a world where everyone can <b>effectively</b> and <b>effortlessly</b>
+          communicate, regardless of their hearing abilities. By recognizing the importance of American Sign
+          Language and its role in facilitating communication for the deaf community, we have taken our first
+          step towards making the world a more accessible place.
+        </p>
+
+        <p>
+          We aim to take the first steps in ASL recognition by creating a model that can recognize the
+          fundamental building blocks of language: the alphabet. We hope that our model can be used as a
+          stepping stone for future research in ASL recognition, and that it can be used to help the deaf
+          community communicate more effectively with their devices and others.
+        </p>
+      </div>
+
+      <img src={FromOnline} alt="Labeled hand doing a 'X' pose" height="600" />
+    </div>
 
     <h3 style="font-size: 35px">Our Team</h3>
+
+    <p>Hover over the images to learn more about us!</p>
 
     <People />
   </div>
@@ -182,6 +200,31 @@
 </footer>
 
 <style>
+  /* text to the left, image to the right */
+  .about-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-container > div {
+    width: 70%;
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 900px) {
+    .about-container {
+      flex-direction: column;
+    }
+
+    .about-container > div {
+      width: 100%;
+    }
+  }
+
   main {
     margin-top: 2rem;
   }
@@ -288,5 +331,7 @@
     text-align: center;
     font-weight: 800;
     line-height: 1.2;
+    text-transform: uppercase;
+    font-family: 'Outfit Variable', sans-serif;
   }
 </style>
