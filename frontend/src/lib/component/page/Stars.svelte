@@ -5,6 +5,9 @@
   let innerHeight: number;
   let scrollY = 0;
 
+  let mouseX = 0.5;
+  let mouseY = 0.5;
+
   const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
   type Point = [x: number, y: number, z: number];
@@ -22,13 +25,25 @@
     for (const [x, y, z] of points) {
       context.fillStyle = `rgba(255, 255, 255, ${z})`;
       context.beginPath();
-      context.arc(x * width, y * height - (2 * scrollY * z) / 3, 2, 0, 2 * Math.PI);
+      context.arc(
+        (x + (mouseX - 0.5) / 10 * z) * width,
+        (y + (mouseY - 0.5) / 10 * z) * height - (2 * scrollY * z) / 3,
+        2, 0, 2 * Math.PI
+      );
       context.fill();
     }
   };
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight on:scroll={() => (scrollY = window.scrollY)} />
+<svelte:window 
+  bind:innerWidth
+  bind:innerHeight
+  on:mousemove={({ clientX, clientY }) => {
+    mouseX = clientX / innerWidth;
+    mouseY = clientY / innerHeight;
+  }}
+  on:scroll={() => (scrollY = window.scrollY)}
+/>
 
 <Canvas width={innerWidth} height={innerHeight} class="canvas">
   <Layer {render} />

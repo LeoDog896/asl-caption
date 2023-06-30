@@ -119,8 +119,9 @@
       <h3>
         We ran our model on <a
           style="color: var(--text-bold)"
-          href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project">our ASL dataset</a
-        > for 100 epochs with a pretrained yolov8n base model.
+          href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project">our 26-class ASL dataset</a
+        > with <br/>100 epochs at resolution 640x640 with a pretrained <a href="https://github.com/ultralytics/ultralytics">yolov8n</a> base model,
+        achieving mAP50 scores &gt; 95%.
       </h3>
       <p>(You can filter between loss or accuracy by clicking on the category buttons.)</p>
 
