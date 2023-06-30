@@ -59,11 +59,11 @@
       const text = `${name} @ ${scoreData}%`;
       const textWidth = context.measureText(text).width;
       context.fillStyle = color;
-      context.fillRect(x * xRatio, labelY, textWidth + 2, 20);
+      context.fillRect(x * xRatio - 1, labelY, textWidth + 1, 20);
 
       // draw the class name
       context.fillStyle = 'white';
-      context.fillText(text, x * xRatio + 1, labelY > 0 ? y * yRatio - 4 : y * yRatio + 15);
+      context.fillText(text, x * xRatio + 1, labelY + 15);
     }
   };
 </script>
