@@ -100,6 +100,7 @@
   </h2>
 
   <div class="images">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div
       class="images-container"
       bind:this={container}
