@@ -1,9 +1,0 @@
-[project]
-name = "asl-caption"
-version = "0.1.0"
-dependencies = [
-  "flask",
-  "flask-cors",
-
-  "requests"
-]
