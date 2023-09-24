@@ -3,7 +3,8 @@
   import ImageDisplay from './ImageDisplay.svelte';
   import { process, type LabelledData } from '$lib/model';
   import type * as tf from '@tensorflow/tfjs';
-  const { close } = getContext('simple-modal');
+  import type { Context } from 'svelte-simple-modal';
+  const { close } = getContext<Context>('simple-modal');
 
   let video: HTMLVideoElement;
   let data: LabelledData;

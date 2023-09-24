@@ -26,16 +26,18 @@
       context.fillStyle = `rgba(255, 255, 255, ${z})`;
       context.beginPath();
       context.arc(
-        (x + (mouseX - 0.5) / 10 * z) * width,
-        (y + (mouseY - 0.5) / 10 * z) * height - (2 * scrollY * z) / 3,
-        2, 0, 2 * Math.PI
+        (x + ((mouseX - 0.5) / 10) * z) * width,
+        (y + ((mouseY - 0.5) / 10) * z) * height - (2 * scrollY * z) / 3,
+        2,
+        0,
+        2 * Math.PI
       );
       context.fill();
     }
   };
 </script>
 
-<svelte:window 
+<svelte:window
   bind:innerWidth
   bind:innerHeight
   on:mousemove={({ clientX, clientY }) => {

@@ -36,8 +36,6 @@ jobs:
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    env:
-      VITE_BACKEND_URL: "https://asl-proxy-server-2.diegosesmas1.repl.co/api"
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -63,4 +61,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-

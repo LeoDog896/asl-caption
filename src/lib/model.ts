@@ -107,9 +107,14 @@ export async function process(
 }
 
 export type LabelledData = {
+  /// The image that was processed.
   img: InputData;
+  /// In the flattened format [[y, x, y1, x1], ...]
   boxesData: Float32Array | Int32Array | Uint8Array;
+  /// Corresponds to every box in `boxesData`. Thus, the size of this array is 4x smaller than `boxesData`.
   scoresData: Float32Array | Int32Array | Uint8Array;
+  /// Corresponds to every box in `boxesData`. Thus, the size of this array is 4x smaller than `boxesData`.
   classesData: Float32Array | Int32Array | Uint8Array;
+  /// How much the image was scaled by in the x and y directions.
   ratios: [x: number, y: number];
 };

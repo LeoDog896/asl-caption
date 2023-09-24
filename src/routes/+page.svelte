@@ -3,7 +3,7 @@
   import People from '$lib/component/page/People.svelte';
 
   // Hand image
-  import FromOnline from "../images/hands/from-online.png"
+  import FromOnline from '../images/hands/from-online.png';
 
   // Statistics
   import { Line } from 'svelte-chartjs';
@@ -83,23 +83,24 @@
     <div class="about-container">
       <div>
         <p>
-          We're a group of students who are <b>passionate</b> about promoting inclusive communication
-          for all. We firmly believe that <b>communication</b> is a fundamental human right, and helping
-          people to communicate is our way of giving back to the community.
+          We're a group of students who are <b>passionate</b> about promoting inclusive
+          communication for all. We firmly believe that <b>communication</b> is a fundamental human right,
+          and helping people to communicate is our way of giving back to the community.
         </p>
 
         <p>
-          Our mission is to create a world where everyone can <b>effectively</b> and <b>effortlessly</b>
-          communicate, regardless of their hearing abilities. By recognizing the importance of American Sign
-          Language and its role in facilitating communication for the deaf community, we have taken our first
-          step towards making the world a more accessible place.
+          Our mission is to create a world where everyone can <b>effectively</b> and
+          <b>effortlessly</b>
+          communicate, regardless of their hearing abilities. By recognizing the importance of American
+          Sign Language and its role in facilitating communication for the deaf community, we have taken
+          our first step towards making the world a more accessible place.
         </p>
 
         <p>
-          We aim to take the first steps in ASL recognition by creating a model that can recognize the
-          fundamental building blocks of language: the alphabet. We hope that our model can be used as a
-          stepping stone for future research in ASL recognition, and that it can be used to help the deaf
-          community communicate more effectively with their devices and others.
+          We aim to take the first steps in ASL recognition by creating a model that can recognize
+          the fundamental building blocks of language: the alphabet. We hope that our model can be
+          used as a stepping stone for future research in ASL recognition, and that it can be used
+          to help the deaf community communicate more effectively with their devices and others.
         </p>
       </div>
 
@@ -119,9 +120,12 @@
       <h3>
         We ran our model on <a
           style="color: var(--text-bold)"
-          href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project">our 26-class ASL dataset</a
-        > with <br/>100 epochs at resolution 640x640 with a pretrained <a href="https://github.com/ultralytics/ultralytics">yolov8n</a> base model,
-        achieving mAP50 scores &gt; 95%.
+          href="https://universe.roboflow.com/meredith-lo-pmqx7/asl-project"
+          >our 26-class ASL dataset</a
+        >
+        with <br />100 epochs at resolution 640x640 with a pretrained
+        <a href="https://github.com/ultralytics/ultralytics">yolov8n</a> base model, achieving mAP50
+        scores &gt; 95%.
       </h3>
       <p>(You can filter between loss or accuracy by clicking on the category buttons.)</p>
 

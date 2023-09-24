@@ -1,7 +1,9 @@
 <script lang="ts">
   import { IconX } from '@tabler/icons-svelte';
 
-  export let onClose: any;
+  export let onClose: (
+    event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+  ) => unknown;
 </script>
 
 <button on:click={onClose}><IconX /></button>
